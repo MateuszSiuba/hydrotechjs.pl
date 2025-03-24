@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profesjonalne usługi hydrauliczne w Witnicy i okolicach. Awarie 24h, instalacje CO, hydraulika. Darmowa wycena, gwarancja jakości. Zadzwoń +48 123 456 789">
+    <meta name="keywords" content="hydraulik Witnica, hydraulik lubuskie, hydraulik, awarie wodne, instalacje grzewcze, naprawa hydrauliki, pogotowie hydrauliczne">
+    <meta name="author" content="HydroTech J&S">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <title>HydroTech J&S - Usługi Hydrauliczne</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cookie-container">
+        <div class="cookie-content">
+            <h3>🍪 Ustawienia prywatności</h3>
+            <p>Używamy plików cookies do poprawnego działania strony. Wybierz jedną z opcji:</p>
+            <div class="cookie-buttons">
+                <button class="cookie-accept">Zaakceptuj wszystkie</button>
+                <button class="cookie-reject">Odrzuć nieistotne</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-top"><i class="fas fa-chevron-up"></i></button>
+
+    <header class="main-header">
+        <div class="header-wrapper">
+            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="uslugi.html"><i class="fas fa-tools"></i> Usługi</a></li>
+                    <li><a href="zlecenia.html"><i class="fas fa-truck-fast"></i> Zlecenia</a></li>
+                    <li><a href="kontakt.html"><i class="fas fa-phone"></i> Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h2>Profesjonalne usługi hydrauliczne</h2>
+                    <p>24h/7 - Gwarancja jakości - Szybka interwencja</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="services-section">
+            <div class="section-container">
+                <h2 class="section-title">Nasze usługi</h2>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <i class="fas fa-faucet"></i>
+                        <h3>Hydraulika</h3>
+                        <p>Kompleksowe usługi instalacyjne i naprawcze</p>
+                    </article>
+                    <article class="service-card">
+                        <i class="fas fa-thermometer-half"></i>
+                        <h3>Ogrzewanie</h3>
+                        <p>Instalacja i modernizacja systemów CO</p>
+                    </article>
+                    <article class="service-card">
+                        <i class="fas fa-tools"></i>
+                        <h3>Awaria</h3>
+                        <p>Całodobowa pomoc w nagłych przypadkach</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="section-container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h2>Skontaktuj się z nami</h2>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Mościczki 34A<br>66-460 Witnica</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <p><a href="tel:+48123456789">+48 123 456 789</a></p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:hydrotech.js@op.pl">hydrotech.js@op.pl</a></p>
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>HydroTech J&S</h4>
+                <p>&copy; 2025 Wszystkie prawa zastrzeżone</p>
+            </div>
+            <div class="footer-section">
+                <h4>Nawigacja</h4>
+                <ul>
+                    <li><a href="#">Polityka prywatności</a></li>
+                    <li><a href="#">Regulamin</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Social Media</h4>
+                <div class="social-media">
+                    <a href="https://facebook.com" target="_blank" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                </div>
+                <div class="company-info">
+                    <p>NIP: 599-253-80-52</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

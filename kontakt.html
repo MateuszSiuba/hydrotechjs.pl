@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroTech J&S - Usługi Hydrauliczne</title>
+    <meta name="description" content="Profesjonalne usługi hydrauliczne w Witnicy i okolicach. Awarie 24h, instalacje CO, hydraulika. Darmowa wycena, gwarancja jakości. Zadzwoń +48 123 456 789">
+    <meta name="keywords" content="hydraulik Witnica, hydraulik lubuskie, hydraulik, awarie wodne, instalacje grzewcze, naprawa hydrauliki, pogotowie hydrauliczne">
+    <meta name="author" content="HydroTech J&S">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="podstrony.css">
+</head>
+<body>
+    <div class="cookie-container">
+        <div class="cookie-content">
+            <h3>🍪 Ustawienia prywatności</h3>
+            <p>Używamy plików cookies do poprawnego działania strony. Wybierz jedną z opcji:</p>
+            <div class="cookie-buttons">
+                <button class="cookie-accept">Zaakceptuj wszystkie</button>
+                <button class="cookie-reject">Odrzuć nieistotne</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-top"><i class="fas fa-chevron-up"></i></button>
+
+    <header class="main-header">
+        <div class="header-wrapper">
+            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Strona Główna</a></li>
+                    <li><a href="uslugi.html"><i class="fas fa-tools"></i> Usługi</a></li>
+                    <li><a href="zlecenia.html"><i class="fas fa-truck-fast"></i> Zlecenia</a></li>
+                    <li><a href="kontakt.html"><i class="fas fa-phone"></i> Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h2>Kontakt</h2>
+                    <p>Skontaktuj się z nami</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-page">
+            <div class="section-container">
+                <div class="contact-columns">
+                    <div class="contact-form">
+                        <h3>Formularz kontaktowy</h3>
+                        <form action="https://formspree.io/f/mvgzlgjg" method="POST" class="contact-form">
+                            <input type="hidden" name="_captcha" value="true">
+                            <input type="hidden" name="_next" value="dziekujemy.html">
+                            
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Imię i nazwisko" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Adres email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" placeholder="Numer telefonu (123-456-789)">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Treść wiadomości" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Wyślij wiadomość</button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <h4>Dane kontaktowe</h4>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>Mościczki 34A<br>66-460 Witnica</p>
+                            </div>
+                            <!-- Więcej info -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>HydroTech J&S</h4>
+                <p>&copy; 2025 Wszystkie prawa zastrzeżone</p>
+            </div>
+            <div class="footer-section">
+                <h4>Nawigacja</h4>
+                <ul>
+                    <li><a href="#">Polityka prywatności</a></li>
+                    <li><a href="#">Regulamin</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Social Media</h4>
+                <div class="social-media">
+                    <a href="https://facebook.com" target="_blank" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                </div>
+                <div class="company-info">
+                    <p>NIP: 599-253-80-52</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

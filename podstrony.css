@@ -1,0 +1,193 @@
+.service-details {
+    padding: 4rem 0;
+}
+
+.service-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.service-article {
+    background: var(--card-bg);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.service-header {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.service-header i {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.service-content {
+    padding: 0 1.5rem 1.5rem;
+    display: none;
+}
+
+.service-list {
+    list-style: none;
+}
+
+.service-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Formularze */
+
+.contact-form {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.order-form, .contact-form {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.submit-btn {
+    background: var(--accent);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: var(--primary);
+}
+
+.contact-info {
+    padding: 1rem;
+}
+
+/* Stylowanie sekcji usług */
+.service-details {
+    padding: 4rem 0;
+    background: var(--card-bg);
+}
+
+.service-article {
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.service-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.service-header i {
+    font-size: 1.5rem;
+}
+
+.service-content {
+    padding: 2rem;
+    background: var(--bg);
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+}
+
+.service-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.service-list li i {
+    color: var(--accent);
+    min-width: 25px;
+}
+
+.service-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 768px) {
+    .service-content {
+        padding: 1.5rem;
+    }
+    
+    .service-list li {
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-columns {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
