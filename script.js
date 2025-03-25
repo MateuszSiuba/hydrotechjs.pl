@@ -63,7 +63,7 @@ function initMap() {
     
     L.marker([52.678606, 14.847574])
         .addTo(map)
-        .bindPopup('HydroTech J&S<br>Mościczki 34A<br>66-460 Witnica')
+        .bindPopup('HydroTech J&S<br>Mościczki 34C<br>66-460 Witnica')
         .openPopup();
     
     setTimeout(() => {
