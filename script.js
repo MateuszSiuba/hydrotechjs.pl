@@ -63,7 +63,7 @@ function initMap() {
     
     L.marker([52.678606, 14.847574])
         .addTo(map)
-        .bindPopup('HydroTech J&S<br>Mościczki 34C<br>66-460 Witnica')
+        .bindPopup('HydroTech J&S<br>Mościczki 34A<br>66-460 Witnica')
         .openPopup();
     
     setTimeout(() => {
@@ -125,19 +125,51 @@ window.addEventListener('scroll', animateOnScroll);
 animateOnScroll();
 
 // Lightbox
-document.querySelectorAll('.portfolio-gallery img').forEach(img => {
-    img.addEventListener('click', () => {
-        const lightbox = document.createElement('div');
-        lightbox.className = 'lightbox active';
-        lightbox.innerHTML = `
-            <img src="${img.src}" alt="${img.alt}">
-            <button class="close-btn"><i class="fas fa-times"></i></button>
-        `;
-        
-        lightbox.querySelector('.close-btn').addEventListener('click', () => {
-            lightbox.remove();
-        });
-        
-        document.body.appendChild(lightbox);
+// Funkcja tworząca i pokazująca lightbox
+function openLightbox(type, src, altOrPoster) {
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox active';
+  
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        ${type === 'img' 
+          ? `<img src="${src}" alt="${altOrPoster}">` 
+          : `<video controls autoplay poster="${altOrPoster}">
+              <source src="${src}" type="video/mp4">
+              Twój przeglądarka nie wspiera wideo.
+            </video>`
+        }
+        <button class="close-btn" aria-label="Zamknij lightbox">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    `;
+  
+    lightbox.querySelector('.close-btn').addEventListener('click', () => {
+      lightbox.remove();
     });
-});
+  
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) lightbox.remove();
+    });
+  
+    document.body.appendChild(lightbox);
+  }
+  
+  // Podłączamy galerie obrazków
+  document.querySelectorAll('.portfolio-gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      openLightbox('img', img.src, img.alt);
+    });
+  });
+  
+  // Podłączamy galerie wideo
+  document.querySelectorAll('.portfolio-gallery video').forEach(video => {
+    video.addEventListener('click', () => {
+      // 1) Pauzujemy i resetujemy miniaturę
+      video.pause();
+      video.currentTime = 0;
+
+      openLightbox('video', video.src, video.getAttribute('poster') || '');
+    });
+  });
