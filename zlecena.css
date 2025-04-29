@@ -26,16 +26,18 @@
     gap: 1px;
 }
 
-.portfolio-gallery img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+.portfolio-gallery img,
+.portfolio-gallery video {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.portfolio-gallery img:hover {
-    transform: scale(1.05);
+.portfolio-gallery img:hover,
+.portfolio-gallery video:hover {
+  transform: scale(1.05);
 }
 
 .portfolio-header {
@@ -71,22 +73,106 @@
 .lightbox {
     display: none;
     position: fixed;
-    top: 0;
+    top: 0; 
     left: 0;
-    width: 100%;
+    width: 100%; 
     height: 100%;
     background: rgba(0,0,0,0.9);
     z-index: 9999;
     justify-content: center;
     align-items: center;
-}
-
-.lightbox img {
+    overflow: hidden;
+  }
+  
+  .lightbox-content {
+    position: relative;
     max-width: 90%;
     max-height: 90%;
-    border-radius: 5px;
-}
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  
+  .close-btn i {
+    color: #333;
+    font-size: 1.5rem;
+  }
+  
+  .close-btn:hover {
+    background: rgba(255,255,255,1);
+    transform: scale(1.1);
+  }
+  
+  .lightbox img,
+  .lightbox video {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
 
 .lightbox.active {
     display: flex;
 }
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  /* Przycisk zamykania: */
+  .lightbox .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+  
+.lightbox .close-btn::before {
+    content: none !important;
+}
+
+.lightbox .close-btn i {
+    color: #fff;
+}
+  
+  /* Efekt hover/focus */
+  .lightbox .close-btn:hover,
+  .lightbox .close-btn:focus {
+    background: rgba(255, 255, 255, 0.589);
+    outline: none;
+  }
+  
+  /* Jeżeli chcesz dodać cień, żeby przycisk się bardziej wyróżniał: */
+  .lightbox .close-btn {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  }
