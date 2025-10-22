@@ -834,7 +834,7 @@ body.dark-mode .info-item {
 /* Włacznie dark mode */
 .theme-toggle {
     position: fixed;
-    top: 20px;
+    top: 80px;
     right: 20px;
     background-color: #c7c7c7;
     color: white;
@@ -848,7 +848,7 @@ body.dark-mode .info-item {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 1000;
+    z-index: 999;
 }
 
 /* Responsywność */
@@ -950,6 +950,14 @@ body.dark-mode .info-item {
         padding: 2.5rem 0;
     }
     
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
     #map {
         height: 300px;
     }
@@ -995,6 +1003,14 @@ body.dark-mode .info-item {
     .hero-section {
         min-height: 28vh;
         padding: 2rem 0;
+    }
+    
+    .theme-toggle {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
     }
     
     .cookie-container {

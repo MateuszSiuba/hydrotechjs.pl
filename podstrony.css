@@ -1071,6 +1071,11 @@
     /* Contact Page Responsive */
     .quick-contact-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .quick-contact-btn {
+        padding: 1.5rem;
     }
     
     .contact-columns {
