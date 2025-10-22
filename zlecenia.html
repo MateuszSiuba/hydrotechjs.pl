@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Realizacje Hydrauliczne Witnica - Portfolio | HydroTech J&S</title>
+    <meta name="title" content="Realizacje Hydrauliczne Witnica - Portfolio | HydroTech J&S">
+    <meta name="description" content="📸 Zobacz nasze zrealizowane projekty: instalacje CO, modernizacje hydrauliczne, naprawy awarii. 150+ zadowolonych klientów. Sprawdź nasze portfolio!">
+    <meta name="keywords" content="realizacje hydrauliczne Witnica, portfolio hydraulik, zdjęcia instalacji CO, wykonane zlecenia hydrauliczne, opinie hydraulik Witnica, galeria realizacji">
+    <meta name="author" content="HydroTech J&S">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="language" content="Polish">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hydrotechjs.pl/zlecenia.html">
+    <meta property="og:title" content="Realizacje Hydrauliczne Witnica - Portfolio | HydroTech J&S">
+    <meta property="og:description" content="Zobacz nasze zrealizowane projekty hydrauliczne i instalacyjne. 150+ zadowolonych klientów!">
+    <meta property="og:image" content="https://hydrotechjs.pl/images/portfolio-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Realizacje Hydrauliczne - HydroTech J&S">
+    <meta property="twitter:description" content="Zobacz nasze zrealizowane projekty hydrauliczne w Witnicy i okolicach">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://hydrotechjs.pl/zlecenia.html">
+    
+    <!-- Schema.org for Image Gallery -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Portfolio Realizacji HydroTech J&S",
+      "description": "Galeria zrealizowanych projektów hydraulicznych",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "HydroTech J&S",
+        "image": "https://hydrotechjs.pl/images/logo.jpg"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="podstrony.css">
+    <link rel="stylesheet" href="zlecena.css">
+</head>
+<body>
+    <div class="cookie-container">
+        <div class="cookie-content">
+            <h3>🍪 Ustawienia prywatności</h3>
+            <p>Używamy plików cookies do poprawnego działania strony. Wybierz jedną z opcji:</p>
+            <div class="cookie-buttons">
+                <button class="cookie-accept">Zaakceptuj wszystkie</button>
+                <button class="cookie-reject">Odrzuć nieistotne</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-top"><i class="fas fa-chevron-up"></i></button>
+
+    <header class="main-header">
+        <div class="header-wrapper">
+            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Strona Główna</a></li>
+                    <li><a href="uslugi.html"><i class="fas fa-tools"></i> Usługi</a></li>
+                    <li><a href="zlecenia.html"><i class="fas fa-truck-fast"></i> Zlecenia</a></li>
+                    <li><a href="kontakt.html"><i class="fas fa-phone"></i> Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h2>Nasze Realizacje</h2>
+                    <p>Poznaj nasze wykonane projekty hydrauliczne i instalacyjne</p>
+                    <p class="hero-stats">
+                        <span><i class="fas fa-check-circle"></i> 100+ zadowolonych klientów</span>
+                        <span><i class="fas fa-award"></i> Gwarancja jakości</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-section">
+            <div class="section-container">
+                <h2 class="section-title">Portfolio Zrealizowanych Projektów</h2>
+                <p class="section-subtitle">Zobacz jakość naszej pracy - każdy projekt wykonany profesjonalnie i terminowo</p>
+                <p class="portfolio-note">
+                    <i class="fas fa-info-circle"></i> 
+                    Prezentujemy wybrane realizacje z każdego miesiąca. To tylko część naszych projektów!
+                </p>
+                
+                <!-- Filtry kategorii -->
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-th"></i> Wszystkie <span class="count">5</span>
+                    </button>
+                    <button class="filter-btn" data-filter="hydraulika">
+                        <i class="fas fa-wrench"></i> Hydraulika <span class="count">3</span>
+                    </button>
+                    <button class="filter-btn" data-filter="instalacja-co">
+                        <i class="fas fa-fire"></i> Instalacja CO <span class="count">1</span>
+                    </button>
+                    <button class="filter-btn" data-filter="awaria">
+                        <i class="fas fa-exclamation-triangle"></i> Awaria <span class="count">1</span>
+                    </button>
+                </div>
+                
+                <div class="portfolio-grid">
+                    <!-- Projekt 1 -->
+                    <article class="portfolio-item" data-category="hydraulika">
+                        <div class="portfolio-header">
+                            <div class="portfolio-meta">
+                                <time datetime="2025-04-28">28 Kwietnia 2025</time>
+                                <span class="portfolio-category">Hydraulika</span>
+                            </div>
+                            <h3>Modernizacja instalacji wodnej w hydroforni</h3>
+                        </div>
+                        
+                        <div class="portfolio-gallery">
+                            <img src="attachments/pohydrofirnia.jpeg" alt="Przed modernizacją" loading="lazy">
+                            <img src="attachments/przedhydrofornia.jpeg" alt="Po modernizacji" loading="lazy">
+                            <video 
+                                src="attachments/przedvideo.mp4" 
+                                preload="metadata" 
+                                poster="attachments/przedvideo-poster.jpg" 
+                                loading="lazy"
+                                muted
+                                loop
+                                aria-label="Wideo przed modernizacją">
+                            </video>
+                            <video 
+                                src="attachments/povideo.mp4" 
+                                preload="metadata" 
+                                poster="attachments/povideo-poster.jpg" 
+                                loading="lazy"
+                                muted
+                                loop
+                                aria-label="Wideo po modernizacji">
+                            </video>
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <p>Kompleksowa wymiana przestarzałej instalacji wodnej w hydroforni. Projekt obejmował usunięcie starych, uszkodzonych rur klejonych oraz montaż nowoczesnego systemu zgrzewanego.</p>
+                            <ul class="portfolio-features">
+                                <li><i class="fas fa-check"></i> Wymiana rur klejonych na zgrzewane PP</li>
+                                <li><i class="fas fa-check"></i> Montaż nowych zaworów kulowych</li>
+                                <li><i class="fas fa-check"></i> Sprawdzenie szczelności instalacji</li>
+                                <li><i class="fas fa-check"></i> Optymalizacja przepływu wody</li>
+                            </ul>
+                            
+                            <!-- Share buttons -->
+                            <div class="share-buttons">
+                                <span class="share-label">Udostępnij:</span>
+                                <button class="share-btn facebook" data-share="facebook" title="Udostępnij na Facebooku">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" title="Wyślij przez WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn email" data-share="email" title="Wyślij emailem">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" title="Kopiuj link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projekt 2 - Ogrzewanie podłogowe -->
+                    <article class="portfolio-item" data-category="instalacja-co">
+                        <div class="portfolio-header">
+                            <div class="portfolio-meta">
+                                <time datetime="2025-05-15">15 Maja 2025</time>
+                                <span class="portfolio-category">Instalacja CO</span>
+                            </div>
+                            <h3>Montaż systemu ogrzewania podłogowego</h3>
+                        </div>
+                        
+                        <div class="portfolio-gallery">
+                            <img src="attachments/ogrzpodl1.JPEG" alt="Przygotowanie podłoża" loading="lazy">
+                            <img src="attachments/ogrzpodl2.JPEG" alt="Rozłożone rury ogrzewania" loading="lazy">
+                            <img src="attachments/ogrzpodl3.JPEG" alt="Montaż rozdzielacza" loading="lazy">
+                            <video 
+                                src="attachments/ogrzpodlvid.MOV" 
+                                preload="metadata" 
+                                loading="lazy"
+                                muted
+                                loop
+                                aria-label="Wideo z montażu ogrzewania podłogowego">
+                            </video>
+                            <!-- Dodatkowe zdjęcia tylko w lightbox -->
+                            <img src="attachments/ogrzpodl4.JPEG" alt="Ukończona instalacja" loading="lazy" style="display: none;">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <p>Profesjonalny montaż nowoczesnego systemu ogrzewania podłogowego. Realizacja obejmowała przygotowanie podłoża, ułożenie rur grzewczych, montaż rozdzielacza oraz podłączenie do systemu centralnego ogrzewania.</p>
+                            <ul class="portfolio-features">
+                                <li><i class="fas fa-check"></i> Układanie rur PE-RT w systemie spiralnym</li>
+                                <li><i class="fas fa-check"></i> Montaż rozdzielacza z regulacją strefową</li>
+                                <li><i class="fas fa-check"></i> Próba ciśnieniowa instalacji</li>
+                                <li><i class="fas fa-check"></i> Równomierne rozprowadzenie ciepła w pomieszczeniu</li>
+                            </ul>
+                            
+                            <!-- Share buttons -->
+                            <div class="share-buttons">
+                                <span class="share-label">Udostępnij:</span>
+                                <button class="share-btn facebook" data-share="facebook" title="Udostępnij na Facebooku">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" title="Wyślij przez WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn email" data-share="email" title="Wyślij emailem">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" title="Kopiuj link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projekt 3 - System nawadniania -->
+                    <article class="portfolio-item" data-category="hydraulika">
+                        <div class="portfolio-header">
+                            <div class="portfolio-meta">
+                                <time datetime="2025-06-10">10 Czerwca 2025</time>
+                                <span class="portfolio-category">Hydraulika</span>
+                            </div>
+                            <h3>Instalacja systemu nawadniania podwórka</h3>
+                        </div>
+                        
+                        <div class="portfolio-gallery">
+                            <img src="attachments/systemnawad1.jpeg" alt="Planowanie trasy instalacji" loading="lazy">
+                            <img src="attachments/systemnawad2.jpeg" alt="Układanie rur nawadniających" loading="lazy">
+                            <img src="attachments/systemnawad3.jpeg" alt="Montaż zraszaczy" loading="lazy">
+                            <img src="attachments/systemnawad4.jpeg" alt="System w działaniu" loading="lazy">
+                            <!-- Dodatkowe zdjęcia tylko w lightbox -->
+                            <img src="attachments/systemnawad5.jpeg" alt="Ukończona instalacja" loading="lazy" style="display: none;">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <p>Kompleksowa instalacja automatycznego systemu nawadniania ogrodu. Projekt uwzględniał optymalne rozmieszczenie zraszaczy, podłączenie do źródła wody oraz montaż sterownika czasowego dla wygodnego zarządzania podlewaniem.</p>
+                            <ul class="portfolio-features">
+                                <li><i class="fas fa-check"></i> Układanie podziemnych linii zasilających</li>
+                                <li><i class="fas fa-check"></i> Montaż zraszaczy wysuwanych</li>
+                            </ul>
+                            
+                            <!-- Share buttons -->
+                            <div class="share-buttons">
+                                <span class="share-label">Udostępnij:</span>
+                                <button class="share-btn facebook" data-share="facebook" title="Udostępnij na Facebooku">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" title="Wyślij przez WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn email" data-share="email" title="Wyślij emailem">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" title="Kopiuj link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projekt 4 - Wymiana instalacji przy bojlerze -->
+                    <article class="portfolio-item" data-category="hydraulika">
+                        <div class="portfolio-header">
+                            <div class="portfolio-meta">
+                                <time datetime="2025-07-22">22 Lipca 2025</time>
+                                <span class="portfolio-category">Hydraulika</span>
+                            </div>
+                            <h3>Wymiana instalacji wodnej przy bojlerze</h3>
+                        </div>
+                        
+                        <div class="portfolio-gallery">
+                            <img src="attachments/bojlerprzed1.JPEG" alt="Stara instalacja - przed wymianą" loading="lazy" data-before-after="przed">
+                            <img src="attachments/bojlerpo1.JPEG" alt="Nowa instalacja - po wymianie" loading="lazy" data-before-after="po">
+                            <img src="attachments/bojlerprzed2.JPEG" alt="Detale starej instalacji" loading="lazy" data-before-after="przed">
+                            <img src="attachments/bojlerpo2.JPEG" alt="Detale nowej instalacji" loading="lazy" data-before-after="po">
+                            <!-- Dodatkowe zdjęcia tylko w lightbox -->
+                            <img src="attachments/bojlerprzed3.JPEG" alt="Stara instalacja - widok ogólny" loading="lazy" data-before-after="przed" style="display: none;">
+                            <img src="attachments/bojlerpo3.JPEG" alt="Nowa instalacja - widok ogólny" loading="lazy" data-before-after="po" style="display: none;">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <p>Kompleksowa wymiana przestarzałej instalacji wodnej przy bojlerze. Stare, skorodowane rury zostały zastąpione nowoczesnymi rurami z tworzywa sztucznego, a całość wykonana zgodnie z najwyższymi standardami.</p>
+                            <ul class="portfolio-features">
+                                <li><i class="fas fa-check"></i> Demontaż starej, skorodowanej instalacji</li>
+                                <li><i class="fas fa-check"></i> Montaż nowych rur i połączeń</li>
+                                <li><i class="fas fa-check"></i> Wymiana zaworów i armatury</li>
+                                <li><i class="fas fa-check"></i> Próba szczelności i uruchomienie</li>
+                            </ul>
+                            
+                            <!-- Share buttons -->
+                            <div class="share-buttons">
+                                <span class="share-label">Udostępnij:</span>
+                                <button class="share-btn facebook" data-share="facebook" title="Udostępnij na Facebooku">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" title="Wyślij przez WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn email" data-share="email" title="Wyślij emailem">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" title="Kopiuj link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Projekt 5 - Wymiana grzejników -->
+                    <article class="portfolio-item" data-category="awaria">
+                        <div class="portfolio-header">
+                            <div class="portfolio-meta">
+                                <time datetime="2025-08-10">10 Sierpnia 2025</time>
+                                <span class="portfolio-category">Awaria</span>
+                            </div>
+                            <h3>Naprawa i wymiana uszkodzonych grzejników</h3>
+                        </div>
+                        
+                        <div class="portfolio-gallery">
+                            <img src="attachments/wymianagrzej1.JPG" alt="Uszkodzony grzejnik" loading="lazy">
+                            <img src="attachments/wymianagrzej2.JPG" alt="Proces wymiany" loading="lazy">
+                            <img src="attachments/wymianagrzej3.JPG" alt="Nowy grzejnik zamontowany" loading="lazy">
+                        </div>
+                        
+                        <div class="portfolio-content">
+                            <p>Szybka interwencja w przypadku awarii grzejnika. Uszkodzony element został wymieniony na nowy, a całość przetestowana pod kątem szczelności i prawidłowego działania systemu ogrzewania.</p>
+                            <ul class="portfolio-features">
+                                <li><i class="fas fa-check"></i> Błyskawiczna reakcja na zgłoszenie</li>
+                                <li><i class="fas fa-check"></i> Demontaż uszkodzonego grzejnika</li>
+                                <li><i class="fas fa-check"></i> Montaż nowego elementu</li>
+                                <li><i class="fas fa-check"></i> Odpowietrzenie i test szczelności</li>
+                            </ul>
+                            
+                            <!-- Share buttons -->
+                            <div class="share-buttons">
+                                <span class="share-label">Udostępnij:</span>
+                                <button class="share-btn facebook" data-share="facebook" title="Udostępnij na Facebooku">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" title="Wyślij przez WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn email" data-share="email" title="Wyślij emailem">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" title="Kopiuj link">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>HydroTech J&S</h4>
+                <p>&copy; 2025 Wszystkie prawa zastrzeżone</p>
+            </div>
+            <div class="footer-section">
+                <h4>Nawigacja</h4>
+                <ul>
+                    <li><a href="#">Polityka prywatności</a></li>
+                    <li><a href="#">Regulamin</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Social Media</h4>
+                <div class="social-media">
+                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                </div>
+                <div class="company-info">
+                    <p>NIP: 599-253-80-52</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

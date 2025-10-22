@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Strona nie znaleziona | HydroTech J&S</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        .error-description {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+        .error-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .error-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .error-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-wrapper">
+            <h1 class="logo"><a href="index.html">Hydro<span>Tech J&S</span></a></h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h2 class="error-message">Strona nie znaleziona</h2>
+            <p class="error-description">
+                Przepraszamy, ale strona której szukasz nie istnieje lub została przeniesiona.
+            </p>
+            <div class="error-buttons">
+                <a href="index.html" class="error-btn">
+                    <i class="fas fa-home"></i> Strona główna
+                </a>
+                <a href="kontakt.html" class="error-btn">
+                    <i class="fas fa-phone"></i> Kontakt
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

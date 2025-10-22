@@ -1,0 +1,14 @@
+# robots.txt dla HydroTech J&S
+User-agent: *
+Allow: /
+
+# Zablokuj foldery nieistotne dla SEO
+Disallow: /MAPA/
+Disallow: /attachments/
+Disallow: /*.txt$
+
+# Sitemap
+Sitemap: https://hydrotechjs.pl/sitemap.xml
+
+# Crawl-delay (opcjonalne, zapobiega przeciążeniu serwera)
+Crawl-delay: 1

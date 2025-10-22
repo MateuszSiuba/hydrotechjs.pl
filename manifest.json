@@ -1,0 +1,29 @@
+{
+  "name": "HydroTech J&S - Hydraulik Witnica",
+  "short_name": "HydroTech J&S",
+  "description": "Profesjonalne usługi hydrauliczne w Witnicy i okolicach. Awarie 24h, instalacje CO, hydraulika.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0099ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "utilities"],
+  "lang": "pl",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
