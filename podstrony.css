@@ -981,13 +981,34 @@
 }
 
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
     .form-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .quick-contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .quick-contact-btn {
+        padding: 1.5rem;
+        margin-bottom: 0.5rem;
     }
     
     .contact-columns {
         grid-template-columns: 1fr;
         gap: 2rem;
+        max-width: 100%;
+    }
+    
+    .contact-form-wrapper,
+    .contact-info {
+        grid-column: 1 / -1;
+        max-width: 100%;
     }
     
     .section-title {
@@ -1084,6 +1105,14 @@
     }
     
     .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .contact-info {
+        margin-top: 1rem;
+    }
+    
+    .info-card {
         padding: 1.5rem;
     }
     
