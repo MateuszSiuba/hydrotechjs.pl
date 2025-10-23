@@ -50,28 +50,164 @@ scrollButton.addEventListener('click', () => {
     });
 });
 
-// Inicjalizacja mapy
+// Inicjalizacja mapy Google Maps
 function initMap() {
-    const map = L.map('map', {
-        preferCanvas: true,
-        fadeAnimation: false
-    }).setView([52.678606, 14.847574], 14);
+    const mapElement = document.getElementById('map');
+    if (!mapElement) return;
+
+    // Współrzędne: Mościczki 34C, Witnica
+    const position = { lat: 52.678606, lng: 14.847574 };
     
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
+    // Custom style mapy - dopasowany do kolorystyki strony
+    const mapStyles = [
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [{"color": "#4D8DB5"}, {"lightness": 17}]
+        },
+        {
+            "featureType": "landscape",
+            "elementType": "geometry",
+            "stylers": [{"color": "#f5f5f5"}, {"lightness": 20}]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [{"color": "#ffffff"}, {"lightness": 17}]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [{"color": "#ffffff"}, {"lightness": 29}, {"weight": 0.2}]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "geometry",
+            "stylers": [{"color": "#ffffff"}, {"lightness": 18}]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [{"color": "#f5f5f5"}, {"lightness": 21}]
+        }
+    ];
     
-    L.marker([52.678606, 14.847574])
-        .addTo(map)
-        .bindPopup('HydroTech J&S<br>Mościczki 34A<br>66-460 Witnica')
-        .openPopup();
+    // Tworzenie mapy z custom stylem
+    const map = new google.maps.Map(mapElement, {
+        center: position,
+        zoom: 15,
+        styles: mapStyles,
+        mapTypeControl: true,
+        streetViewControl: true,
+        fullscreenControl: true,
+        zoomControl: true,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_RIGHT,
+        },
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+        streetViewControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        }
+    });
     
-    setTimeout(() => {
-        map.invalidateSize();
-    }, 300);
+    // Custom ikona markera (niebieski pin)
+    const customIcon = {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: '#2B4F6C',
+        fillOpacity: 1,
+        strokeColor: '#ffffff',
+        strokeWeight: 3,
+        scale: 12
+    };
+    
+    // Dodanie markera z animacją
+    const marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: 'HydroTech J&S',
+        animation: google.maps.Animation.DROP,
+        icon: customIcon
+    });
+    
+    // Okrąg promienia działania (50km)
+    const serviceArea = new google.maps.Circle({
+        strokeColor: '#4D8DB5',
+        strokeOpacity: 0.4,
+        strokeWeight: 2,
+        fillColor: '#4D8DB5',
+        fillOpacity: 0.1,
+        map: map,
+        center: position,
+        radius: 50000 // 50km w metrach
+    });
+    
+    // Stylowe info okienko
+    const infoWindow = new google.maps.InfoWindow({
+        content: `
+            <div style="padding: 15px; font-family: 'Segoe UI', sans-serif; max-width: 280px;">
+                <div style="border-left: 4px solid #2B4F6C; padding-left: 12px; margin-bottom: 12px;">
+                    <h3 style="margin: 0 0 8px 0; color: #2B4F6C; font-size: 1.3rem; font-weight: 700;">
+                        HydroTech J&S
+                    </h3>
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">Profesjonalne usługi hydrauliczne</p>
+                </div>
+                
+                <div style="margin: 12px 0; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                    <p style="margin: 6px 0; color: #333; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                        <span style="color: #4D8DB5; font-size: 1.1rem;">📍</span>
+                        <strong>Mościczki 34C</strong><br>
+                        <span style="margin-left: 28px; color: #666;">66-460 Witnica</span>
+                    </p>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 12px;">
+                    <a href="tel:+48502313419" 
+                       style="flex: 1; padding: 10px; background: linear-gradient(135deg, #2B4F6C, #4D8DB5); 
+                              color: white; text-decoration: none; border-radius: 6px; text-align: center; 
+                              font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; 
+                              justify-content: center; gap: 6px; transition: transform 0.2s;">
+                        📞 Zadzwoń
+                    </a>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=52.678606,14.847574" 
+                       target="_blank"
+                       style="flex: 1; padding: 10px; background: white; color: #2B4F6C; 
+                              border: 2px solid #2B4F6C; text-decoration: none; border-radius: 6px; 
+                              text-align: center; font-weight: 600; font-size: 0.9rem; 
+                              display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        🗺️ Nawiguj
+                    </a>
+                </div>
+                
+                <p style="margin: 12px 0 0 0; padding-top: 10px; border-top: 1px solid #e0e0e0; 
+                          color: #666; font-size: 0.85rem; text-align: center;">
+                    <span style="color: #4D8DB5; font-weight: 600;">⭕ Zasięg działania: 50km</span>
+                </p>
+            </div>
+        `
+    });
+    
+    // Otwórz info okienko od razu
+    infoWindow.open(map, marker);
+    
+    // Kliknięcie w marker - bounce animation
+    marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(() => marker.setAnimation(null), 2100); // 3 bounces
+    });
+    
+    // Kliknięcie w okrąg - pokaż info
+    google.maps.event.addListener(serviceArea, 'click', () => {
+        map.setZoom(11);
+        map.panTo(position);
+    });
 }
 
-document.addEventListener('DOMContentLoaded', initMap);
+// Globalnie dostępna funkcja dla Google Maps callback
+window.initMap = initMap;
 
 // Animacje
 const animateOnScroll = () => {
