@@ -1,3 +1,48 @@
+// Wyrejestruj Service Worker (jeśli istnieje) i wyczyść cache
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+            registration.unregister();
+        }
+    });
+    
+    // Wyczyść cache
+    if ('caches' in window) {
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    return caches.delete(cacheName);
+                })
+            );
+        });
+    }
+}
+
+// Loading Screen - tylko przy wolnym ładowaniu
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.querySelector('.loading-screen');
+    const pageLoadStart = Date.now();
+
+    window.addEventListener('load', () => {
+        const loadTime = Date.now() - pageLoadStart;
+        
+        if (loadingScreen) {
+            // Pokaż tylko jeśli ładowanie trwało dłużej niż 1 sekundę
+            if (loadTime > 1000) {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hide');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 500);
+            } else {
+                // Szybkie ładowanie - od razu ukryj
+                loadingScreen.style.display = 'none';
+            }
+        }
+    });
+});
+
 // Dark mode wlaczenie
 const themeToggle = document.createElement('button');
 themeToggle.className = 'theme-toggle';
@@ -522,13 +567,50 @@ function openLightbox(type, src, altOrPoster, galleryElement) {
 }
 
 function showLightboxImage(index) {
-    const existingLightbox = document.querySelector('.lightbox');
-    if (existingLightbox) {
-        existingLightbox.remove();
-    }
-
     const item = currentGalleryItems[index];
-    const lightbox = document.createElement('div');
+    let lightbox = document.querySelector('.lightbox');
+    
+    // Jeśli lightbox istnieje, tylko zaktualizuj zawartość z animacją
+    if (lightbox) {
+        const mediaContainer = lightbox.querySelector('.lightbox-content > img, .lightbox-content > video');
+        
+        // Fade out starego obrazu
+        if (mediaContainer) {
+            mediaContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Zaktualizuj zawartość
+                const newMediaHTML = item.type === 'img' 
+                    ? `<img src="${item.src}" alt="${item.alt}" loading="eager" style="opacity: 0; transition: opacity 0.3s ease;">` 
+                    : `<video controls autoplay loop poster="${item.poster}" style="opacity: 0; transition: opacity 0.3s ease;">
+                        <source src="${item.src}" type="video/mp4">
+                        Twoja przeglądarka nie wspiera wideo.
+                    </video>`;
+                
+                mediaContainer.outerHTML = newMediaHTML;
+                
+                // Fade in nowego obrazu
+                const newMedia = lightbox.querySelector('.lightbox-content > img, .lightbox-content > video');
+                setTimeout(() => {
+                    newMedia.style.opacity = '1';
+                }, 10);
+                
+                // Aktualizuj licznik i buttony
+                const counter = lightbox.querySelector('.lightbox-counter span');
+                counter.textContent = `${index + 1} / ${currentGalleryItems.length}`;
+                
+                const prevBtn = lightbox.querySelector('.prev');
+                const nextBtn = lightbox.querySelector('.next');
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === currentGalleryItems.length - 1;
+            }, 150);
+        }
+        
+        return;
+    }
+    
+    // Jeśli lightbox nie istnieje, stwórz nowy
+    lightbox = document.createElement('div');
     lightbox.className = 'lightbox active';
     
     lightbox.innerHTML = `

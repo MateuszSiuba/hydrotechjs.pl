@@ -47,32 +47,29 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    
     <!-- Preconnect dla lepszej wydajności -->
     <link rel="preconnect" href="https://maps.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3.0">
     
-    <!-- Schema.org Markup (JSON-LD) -->
+    <!-- Structured Data - Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "HydroTech J&S",
-      "image": "https://hydrotechjs.pl/images/logo.jpg",
-      "@id": "https://hydrotechjs.pl",
+      "image": "https://hydrotechjs.pl/images/og-image.jpg",
+      "description": "Profesjonalny hydraulik Witnica i okolice. Awarie 24/7, instalacje CO, hydraulika sanitarna.",
       "url": "https://hydrotechjs.pl",
       "telephone": "+48502313419",
-      "email": "hydrotech.js@op.pl",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Mościczki 34C",
         "addressLocality": "Witnica",
+        "addressRegion": "Lubuskie",
         "postalCode": "66-460",
         "addressCountry": "PL"
       },
@@ -95,25 +92,24 @@
           "closes": "15:00"
         }
       ],
-      "priceRange": "$$",
-      "sameAs": [
-        "https://www.facebook.com/p/HydroTech-JS-61573979556456/",
-        "https://instagram.com/hydrotechjs"
-      ],
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": 52.678606,
-          "longitude": 14.847574
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Witnica"
         },
-        "geoRadius": "50000"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "87"
-      },
+        {
+          "@type": "City",
+          "name": "Gorzów Wielkopolski"
+        },
+        {
+          "@type": "City",
+          "name": "Kostrzyn nad Odrą"
+        },
+        {
+          "@type": "City",
+          "name": "Sulęcin"
+        }
+      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Usługi hydrauliczne",
@@ -122,8 +118,8 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Awarie hydrauliczne 24h",
-              "description": "Pogotowie hydrauliczne - dojazd w ciągu 2h"
+              "name": "Hydraulika sanitarna",
+              "description": "Wymiana baterii, naprawa przecieków, montaż instalacji wodnych"
             }
           },
           {
@@ -131,23 +127,89 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Instalacje CO",
-              "description": "Montaż i modernizacja systemów centralnego ogrzewania"
+              "description": "Montaż grzejników, instalacja kotłów gazowych, ogrzewanie podłogowe"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Hydraulika sanitarna",
-              "description": "Kompleksowe wyposażenie łazienek i toalet"
+              "name": "Awarie 24/7",
+              "description": "Pogotowie hydrauliczne - naprawa awarii wodnych całodobowo"
             }
           }
         ]
-      }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "4"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Ryszard"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "Szybko, sprawnie i terminowo. Polecam."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Mati295"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "Super wykonali robotę, polecam!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Dominik Stawicki"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "Solidna firma 👍 Można polecić każdemu."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Half -DeaD"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "Lokalny przewodnik - 48 opinii. Świetna jakość usług!"
+        }
+      ]
     }
     </script>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-water"></i>
+            </div>
+            <div class="loading-spinner"></div>
+            <p>HydroTech J&S</p>
+        </div>
+    </div>
+
     <div class="cookie-container">
         <div class="cookie-content">
             <h3>🍪 Ustawienia prywatności</h3>
@@ -168,7 +230,7 @@
             <nav>
                 <ul class="nav-menu">
                     <li><a href="uslugi.html"><i class="fas fa-tools"></i> Usługi</a></li>
-                    <li><a href="zlecenia.html"><i class="fas fa-truck-fast"></i> Zlecenia</a></li>
+                    <li><a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a></li>
                     <li><a href="kontakt.html"><i class="fas fa-phone"></i> Kontakt</a></li>
                 </ul>
             </nav>
@@ -247,49 +309,161 @@
             </div>
         </section>
 
-        <!-- Dlaczego My -->
-        <section class="why-us-section">
+        <!-- Kontakt z Dlaczego My -->
+        <section class="contact-section">
             <div class="section-container">
-                <h2 class="section-title">Dlaczego warto wybrać nas?</h2>
-                <div class="why-us-grid">
+                <h2 class="section-title">Dlaczego my?</h2>
+                
+                <!-- Dlaczego My Grid -->
+                <div class="why-contact-grid">
                     <div class="why-us-item">
                         <i class="fas fa-shield-alt"></i>
                         <h3>Gwarancja Jakości</h3>
-                        <p>Udzielamy gwarancji na wszystkie wykonane prace</p>
+                        <p>Gwarancja na wszystkie prace</p>
                     </div>
                     <div class="why-us-item">
                         <i class="fas fa-piggy-bank"></i>
                         <h3>Konkurencyjne Ceny</h3>
-                        <p>Darmowa wycena i przystępne ceny usług</p>
+                        <p>Darmowa wycena bez zobowiązań</p>
                     </div>
                     <div class="why-us-item">
                         <i class="fas fa-bolt"></i>
                         <h3>Szybka Reakcja</h3>
-                        <p>Interwencja w awariach już od 30 minut</p>
+                        <p>Interwencja od 30 minut</p>
+                    </div>
+                    <div class="why-us-item featured">
+                        <i class="fas fa-star"></i>
+                        <h3>Ocena 5.0</h3>
+                        <div class="stars-small">★★★★★</div>
+                        <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="reviews-link">Zobacz opinie</a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="contact-section">
-            <div class="section-container">
-                <div class="contact-wrapper">
-                    <div class="contact-info">
-                        <h2>Skontaktuj się z nami</h2>
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Mościczki 34C<br>66-460 Witnica</p>
+                <!-- Opinie klientów -->
+                <section class="testimonials-section">
+                    <h2 class="section-title">Co mówią nasi klienci?</h2>
+                    <p class="section-subtitle">Sprawdź opinie zadowolonych klientów z Google</p>
+                    
+                    <!-- Google Reviews Widget -->
+                    <div class="google-reviews-widget">
+                        <div class="widget-header">
+                            <i class="fab fa-google"></i>
+                            <div>
+                                <h3>HydroTech J&S</h3>
+                                <div class="rating-summary">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="rating-text">5.0 na podstawie 4 opinii Google</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <p><a href="tel:+48502313419">+48 502 313 419</a></p>
+                        <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="widget-link">
+                            Napisz opinię
+                        </a>
+                    </div>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    <span>R</span>
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Ryszard</h4>
+                                    <div class="stars">★★★★★</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Szybko, sprawnie i terminowo. Polecam."</p>
+                            <span class="testimonial-date">5 miesięcy temu</span>
                         </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <p><a href="mailto:hydrotech.js@op.pl">hydrotech.js@op.pl</a></p>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    <span>M</span>
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Mati295</h4>
+                                    <div class="stars">★★★★★</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Super wykonali robotę, polecam!"</p>
+                            <span class="testimonial-date">6 miesięcy temu</span>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    <span>D</span>
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Dominik Stawicki</h4>
+                                    <div class="stars">★★★★★</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Solidna firma 👍..."</p>
+                            <span class="testimonial-date">7 miesięcy temu</span>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">
+                                    <span>H</span>
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>Half -DeaD</h4>
+                                    <div class="stars">★★★★★</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text"></p>
+                            <span class="testimonial-date">7 miesięcy temu</span>
                         </div>
                     </div>
-                    <div id="map"></div>
+                </section>
+
+                <!-- Kontakt i Mapa -->
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Kontakt</h3>
+                        <div class="info-items">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Adres</strong>
+                                    <p>Mościczki 34C<br>66-460 Witnica</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Telefon</strong>
+                                    <p><a href="tel:+48502313419">+48 502 313 419</a></p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <p><a href="mailto:hydrotech.js@op.pl">hydrotech.js@op.pl</a></p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Godziny pracy</strong>
+                                    <p>Pn-Pt: 8:00-18:00<br>Sobota: 9:00-15:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-map">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -315,15 +489,24 @@
                         <i class="fab fa-facebook-f"></i>
                         Facebook
                     </a>
+                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-link">
+                        <i class="fab fa-google"></i>
+                        Google
+                    </a>
                 </div>
                 <div class="company-info">
                     <p>NIP: 599-253-80-52</p>
                 </div>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p class="developer-credit">Wykonanie strony: <a href="https://github.com/MateuszSiuba" target="_blank" rel="noopener noreferrer">Mateusz Siuba</a></p>
+        </div>
     </footer>
 
+    <!-- Google Maps API - WAŻNE: Zabezpiecz klucz w Google Cloud Console! 
+         Zobacz: SECURITY_GOOGLE_MAPS.md -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap" async defer></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>

@@ -45,8 +45,8 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="podstrony.css">
+    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="podstrony.css?v=3.0">
     
     <!-- Schema.org for Contact Page -->
     <script type="application/ld+json">
@@ -112,12 +112,21 @@
                 <ul class="nav-menu">
                     <li><a href="index.html"><i class="fas fa-home"></i> Strona Główna</a></li>
                     <li><a href="uslugi.html"><i class="fas fa-tools"></i> Usługi</a></li>
-                    <li><a href="zlecenia.html"><i class="fas fa-truck-fast"></i> Zlecenia</a></li>
-                    <li><a href="kontakt.html"><i class="fas fa-phone"></i> Kontakt</a></li>
+                    <li><a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a></li>
+                    <li><a href="kontakt.html" class="active"><i class="fas fa-phone"></i> Kontakt</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Nawigacja okruszkowa">
+        <div class="container">
+            <a href="index.html"><i class="fas fa-home"></i> Strona główna</a>
+            <span class="separator">/</span>
+            <span class="current">Kontakt</span>
+        </div>
+    </nav>
 
     <main>
         <section class="hero-section">
@@ -184,9 +193,12 @@
                                 <h3>Napisz do nas</h3>
                                 <p>Odpowiemy najszybciej jak to możliwe</p>
                             </div>
-                            <form action="https://formspree.io/f/mvgzlgjg" method="POST">
+                            <form action="https://formspree.io/f/mvgzlgjg" method="POST" id="contactForm">
                                 <input type="hidden" name="_captcha" value="true">
                                 <input type="hidden" name="_next" value="dziekujemy.html">
+                                
+                                <!-- Status Message -->
+                                <div class="form-status" style="display: none;"></div>
                                 
                                 <div class="form-row">
                                     <div class="form-group">
@@ -324,9 +336,9 @@
                                     <i class="fab fa-facebook-f"></i>
                                     <span>Facebook</span>
                                 </a>
-                                <a href="https://instagram.com" target="_blank" class="social-btn instagram">
-                                    <i class="fab fa-instagram"></i>
-                                    <span>Instagram</span>
+                                <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-btn google">
+                                    <i class="fab fa-google"></i>
+                                    <span>Google</span>
                                 </a>
                             </div>
                         </div>
@@ -417,15 +429,24 @@
                         <i class="fab fa-facebook-f"></i>
                         Facebook
                     </a>
+                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-link">
+                        <i class="fab fa-google"></i>
+                        Google
+                    </a>
                 </div>
                 <div class="company-info">
                     <p>NIP: 599-253-80-52</p>
                 </div>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p class="developer-credit">Wykonanie strony: <a href="https://github.com/MateuszSiuba" target="_blank" rel="noopener noreferrer">Mateusz Siuba</a></p>
+        </div>
     </footer>
 
+    <!-- Google Maps API - WAŻNE: Zabezpiecz klucz w Google Cloud Console! 
+         Zobacz: SECURITY_GOOGLE_MAPS.md -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap" async defer></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>

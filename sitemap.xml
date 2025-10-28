@@ -5,7 +5,7 @@
     <!-- Strona główna -->
     <url>
         <loc>https://hydrotechjs.pl/</loc>
-        <lastmod>2025-10-22</lastmod>
+        <lastmod>2025-10-28</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -13,15 +13,15 @@
     <!-- Usługi -->
     <url>
         <loc>https://hydrotechjs.pl/uslugi.html</loc>
-        <lastmod>2025-10-22</lastmod>
+        <lastmod>2025-10-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
-    <!-- Realizacje/Zlecenia -->
+    <!-- Blog -->
     <url>
-        <loc>https://hydrotechjs.pl/zlecenia.html</loc>
-        <lastmod>2025-10-22</lastmod>
+        <loc>https://hydrotechjs.pl/blog.html</loc>
+        <lastmod>2025-10-28</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -29,7 +29,7 @@
     <!-- Kontakt -->
     <url>
         <loc>https://hydrotechjs.pl/kontakt.html</loc>
-        <lastmod>2025-10-22</lastmod>
+        <lastmod>2025-10-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

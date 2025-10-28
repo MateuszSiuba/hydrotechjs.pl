@@ -2,9 +2,8 @@
 User-agent: *
 Allow: /
 
-# Zablokuj foldery nieistotne dla SEO
+# Zablokuj foldery nieistotne dla SEO (NIE blokuj attachments - galeria!)
 Disallow: /MAPA/
-Disallow: /attachments/
 Disallow: /*.txt$
 
 # Sitemap
