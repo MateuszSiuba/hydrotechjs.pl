@@ -10,40 +10,21 @@ class BlogManager {
         this.searchQuery = '';
     }
 
-    // Automatyczne ładowanie wszystkich plików .md z folderu posts
+    // Ładowanie postów z pliku JSON
     async loadPosts() {
-        // Lista plików - w produkcji można to zautomatyzować przez API
-        const postFiles = [
-            '2025-09-15-jak-przygotowac-dom-do-zimy.md',
-            '2025-09-05-ogrzewanie-podlogowe.md',
-            '2025-08-10-wymiana-grzejnikow.md',
-            '2025-07-28-oznaki-wymiany-bojlera.md',
-            '2025-07-22-wymiana-instalacji-bojler.md',
-            '2025-06-10-system-nawadniania.md',
-            '2025-06-05-hydrofornia-czy-pompa.md',
-            '2025-05-15-ogrzewanie-podlogowe-montaz.md',
-            '2025-04-28-modernizacja-hydroforni.md',
-        ];
-
-        for (const file of postFiles) {
-            try {
-                const response = await fetch(`/posts/${file}`);
-                const content = await response.text();
-                const post = this.parseMarkdown(content, file);
-                
-                // Filtruj tylko opublikowane posty (nie draft)
-                if (post && post.status === 'published') {
-                    this.allPosts.push(post);
-                }
-            } catch (error) {
-                console.error(`Błąd ładowania posta: ${file}`, error);
-            }
+        try {
+            const response = await fetch('/posts/posts.json');
+            const posts = await response.json();
+            
+            // Filtruj tylko opublikowane posty (nie draft)
+            this.allPosts = posts.filter(post => post.status === 'published');
+            this.allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            this.filteredPosts = [...this.allPosts];
+            this.renderPosts();
+            this.renderPagination();
+        } catch (error) {
+            console.error('Błąd ładowania postów:', error);
         }
-
-        this.allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-        this.filteredPosts = [...this.allPosts];
-        this.renderPosts();
-        this.renderPagination();
     }
 
     parseMarkdown(content, filename) {
@@ -164,7 +145,7 @@ class BlogManager {
             posts = posts.filter(post => {
                 return post.title.toLowerCase().includes(query) ||
                        post.description.toLowerCase().includes(query) ||
-                       post.body.toLowerCase().includes(query) ||
+                       post.content.toLowerCase().includes(query) ||
                        (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)));
             });
         }
@@ -352,7 +333,7 @@ class BlogManager {
             ${galleryHTML}
             
             <div class="portfolio-content">
-                <p>${post.description || post.body}</p>
+                <p>${post.description || post.content}</p>
                 ${featuresHTML}
                 ${tagsHTML}
                 
