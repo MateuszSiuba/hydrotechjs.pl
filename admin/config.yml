@@ -1,0 +1,33 @@
+backend:
+  name: github
+  repo: MateuszSiuba/hydrotechjs.pl
+  branch: main
+
+# Lokalny development (odkomentuj gdy pracujesz lokalnie)
+# local_backend: true
+
+media_folder: "attachments"
+public_folder: "/attachments"
+
+collections:
+  - name: "blog"
+    label: "Posty Blogowe"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Kategoria", name: "category", widget: "select", options: ["realizacje", "porady", "pytania"]}
+      - {label: "Status", name: "status", widget: "select", options: ["draft", "published"], default: "draft"}
+      - {label: "Opis krótki (SEO)", name: "description", widget: "text"}
+      - {label: "Meta Description (SEO)", name: "seo_description", widget: "text", required: false}
+      - {label: "Główne zdjęcie", name: "featured_image", widget: "image", required: false}
+      - {label: "Autor", name: "author", widget: "string", default: "HydroTech J&S"}
+      - {label: "Tagi", name: "tags", widget: "list", required: false, field: {label: "Tag", name: "tag", widget: "string"}}
+      - {label: "Treść", name: "body", widget: "markdown"}
+      - {label: "Zdjęcia galerii", name: "gallery", widget: "list", required: false, fields: [
+          {label: "Plik", name: "image", widget: "image"},
+          {label: "Alt", name: "alt", widget: "string"}
+        ]}
+      - {label: "Cechy projektu", name: "features", widget: "list", required: false, field: {label: "Cecha", name: "feature", widget: "string"}}

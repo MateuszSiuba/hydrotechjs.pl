@@ -1,0 +1,26 @@
+{
+  "name": "hydraulika-zmieniona",
+  "version": "1.0.0",
+  "description": "",
+  "main": "blog-manager.js",
+  "scripts": {
+    "proxy": "npx netlify-cms-proxy-server",
+    "dev": "python -m http.server 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MateuszSiuba/hydrotechjs.pl.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MateuszSiuba/hydrotechjs.pl/issues"
+  },
+  "homepage": "https://github.com/MateuszSiuba/hydrotechjs.pl#readme",
+  "devDependencies": {
+    "netlify-cms-proxy-server": "^1.3.24"
+  }
+}
