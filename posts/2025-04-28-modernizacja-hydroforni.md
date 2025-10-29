@@ -4,6 +4,7 @@ date: 2025-04-28T10:00:00.000Z
 category: realizacje
 status: published
 description: "Kompleksowa wymiana przestarzałej instalacji wodnej w hydroforni. Projekt obejmował usunięcie starych, uszkodzonych rur klejonych oraz montaż nowoczesnego systemu zgrzewanego."
+seo_description: "Modernizacja hydroforni — wymiana rur, nowoczesne rozwiązania i testy szczelności. Zwiększ niezawodność dostaw wody w oparciu o sprawdzone metody."
 author: "HydroTech J&S"
 tags:
   - "realizacje"

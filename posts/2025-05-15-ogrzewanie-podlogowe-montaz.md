@@ -4,6 +4,7 @@ date: 2025-05-15T10:00:00.000Z
 category: realizacje
 status: published
 description: "Profesjonalny montaż nowoczesnego systemu ogrzewania podłogowego. Realizacja obejmowała przygotowanie podłoża, ułożenie rur grzewczych, montaż rozdzielacza oraz podłączenie do systemu centralnego ogrzewania."
+seo_description: "Montaż ogrzewania podłogowego — etapy prac, użyte materiały i zalecenia. Sprawdź, jak wygląda profesjonalna instalacja od HydroTech J&S."
 author: "HydroTech J&S"
 tags:
   - "realizacje"

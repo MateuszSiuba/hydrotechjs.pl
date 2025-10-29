@@ -4,6 +4,7 @@ date: 2025-06-10T10:00:00.000Z
 category: realizacje
 status: published
 description: "Kompleksowa instalacja automatycznego systemu nawadniania ogrodu. Projekt uwzględniał optymalne rozmieszczenie zraszaczy, podłączenie do źródła wody oraz montaż sterownika czasowego."
+seo_description: "Profesjonalna instalacja systemu nawadniania — projekt, montaż zraszaczy i sterownik czasowy. Zadbaj o ogród z HydroTech J&S."
 author: "HydroTech J&S"
 tags:
   - "realizacje"

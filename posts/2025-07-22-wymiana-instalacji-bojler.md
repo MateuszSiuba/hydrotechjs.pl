@@ -4,6 +4,7 @@ date: 2025-07-22T10:00:00.000Z
 category: realizacje
 status: published
 description: "Kompleksowa wymiana przestarzałej instalacji wodnej przy bojlerze. Stare, skorodowane rury zostały zastąpione nowoczesnymi rurami z tworzywa sztucznego."
+seo_description: "Kompleksowa wymiana instalacji przy bojlerze — od usunięcia starych rur po testy szczelności. Zobacz efekty modernizacji krok po kroku."
 author: "HydroTech J&S"
 tags:
   - "realizacje"

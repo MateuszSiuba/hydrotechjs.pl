@@ -4,6 +4,7 @@ date: 2025-06-05T10:00:00.000Z
 category: pytania
 status: published
 description: "Mam studnię 15m głębokości. Nie wiem czy wybrać hydrofornię czy pompę głębinową. Co polecacie?"
+seo_description: "Hydrofornia czy pompa głębinowa — porównanie zalet i wad przy 15 m głębokości studni. Nasza rekomendacja i praktyczne wskazówki."
 author: "HydroTech J&S"
 tags:
   - "hydrofornia"

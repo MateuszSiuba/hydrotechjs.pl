@@ -4,6 +4,7 @@ date: 2025-09-15T10:00:00.000Z
 category: porady
 status: published
 description: "Zbliżająca się zima to idealna pora, aby zadbać o sprawność instalacji grzewczej i wodnej. Właściwe przygotowanie pozwoli uniknąć awarii w najbardziej mroźne dni."
+seo_description: "Jak przygotować instalację grzewczą i wodną do zimy — praktyczne kroki, które zmniejszą ryzyko awarii i obniżą koszty. Sprawdź listę kontrolną od HydroTech J&S."
 author: "HydroTech J&S"
 tags:
   - "porady hydrauliczne"

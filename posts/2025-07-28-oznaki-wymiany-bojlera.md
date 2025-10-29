@@ -4,6 +4,7 @@ date: 2025-07-28T10:00:00.000Z
 category: porady
 status: published
 description: "Bojler to serce instalacji ciepłej wody w domu. Jak rozpoznać, że zbliża się koniec jego żywotności?"
+seo_description: "Dowiedz się, kiedy wymienić bojler: symptomy, oznaki zużycia i praktyczne wskazówki. Zapobiegaj awariom dzięki regularnym przeglądom."
 author: "HydroTech J&S"
 tags:
   - "bojler"

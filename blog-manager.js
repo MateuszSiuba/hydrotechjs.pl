@@ -13,9 +13,28 @@ class BlogManager {
     // Ładowanie postów z pliku JSON
     async loadPosts() {
         try {
-            const response = await fetch('/posts/posts.json');
-            const posts = await response.json();
-            
+            // Manifest zawiera listę plików markdown z katalogu /posts/
+            const manifestResp = await fetch('/posts/posts.json');
+            if (!manifestResp.ok) throw new Error('Brak manifestu postów');
+            const manifest = await manifestResp.json();
+
+            const posts = [];
+            for (const entry of manifest) {
+                const filename = entry.file || entry.filename || entry;
+                try {
+                    const resp = await fetch(`/posts/${filename}`);
+                    if (!resp.ok) {
+                        console.warn(`Nie można pobrać pliku: /posts/${filename}`);
+                        continue;
+                    }
+                    const text = await resp.text();
+                    const post = this.parseMarkdown(text, filename);
+                    if (post) posts.push(post);
+                } catch (err) {
+                    console.warn('Błąd podczas pobierania postu', filename, err);
+                }
+            }
+
             // Filtruj tylko opublikowane posty (nie draft)
             this.allPosts = posts.filter(post => post.status === 'published');
             this.allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));

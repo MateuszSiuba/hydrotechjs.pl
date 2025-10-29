@@ -4,6 +4,7 @@ date: 2025-08-10T10:00:00.000Z
 category: realizacje
 status: published
 description: "Szybka interwencja w przypadku awarii grzejnika. Uszkodzony element został wymieniony na nowy, a całość przetestowana pod kątem szczelności i prawidłowego działania systemu ogrzewania."
+seo_description: "Praktyczny opis wymiany grzejnika: diagnoza, demontaż, montaż oraz test szczelności — zobacz jak przebiega bezpieczna i szybka naprawa."
 author: "HydroTech J&S"
 tags:
   - "realizacje"

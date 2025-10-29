@@ -4,6 +4,7 @@ date: 2025-09-05T10:00:00.000Z
 category: pytania
 status: published
 description: "Planuję remont łazienki i zastanawiam się nad ogrzewaniem podłogowym. Czy to się opłaca?"
+seo_description: "Czy ogrzewanie podłogowe to opłacalna inwestycja? Zalety, koszty i kiedy warto montować — praktyczny przewodnik od HydroTech J&S."
 author: "HydroTech J&S"
 tags:
   - "ogrzewanie podłogowe"
