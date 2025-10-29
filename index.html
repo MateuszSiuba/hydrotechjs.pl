@@ -368,60 +368,9 @@
                     </div>
                     
                     <div class="testimonials-grid">
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <div class="testimonial-avatar">
-                                    <span>R</span>
-                                </div>
-                                <div class="testimonial-info">
-                                    <h4>Ryszard</h4>
-                                    <div class="stars">★★★★★</div>
-                                </div>
-                            </div>
-                            <p class="testimonial-text">"Szybko, sprawnie i terminowo. Polecam."</p>
-                            <span class="testimonial-date">5 miesięcy temu</span>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <div class="testimonial-avatar">
-                                    <span>M</span>
-                                </div>
-                                <div class="testimonial-info">
-                                    <h4>Mati295</h4>
-                                    <div class="stars">★★★★★</div>
-                                </div>
-                            </div>
-                            <p class="testimonial-text">"Super wykonali robotę, polecam!"</p>
-                            <span class="testimonial-date">6 miesięcy temu</span>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <div class="testimonial-avatar">
-                                    <span>D</span>
-                                </div>
-                                <div class="testimonial-info">
-                                    <h4>Dominik Stawicki</h4>
-                                    <div class="stars">★★★★★</div>
-                                </div>
-                            </div>
-                            <p class="testimonial-text">"Solidna firma 👍..."</p>
-                            <span class="testimonial-date">7 miesięcy temu</span>
-                        </div>
-
-                        <div class="testimonial-card">
-                            <div class="testimonial-header">
-                                <div class="testimonial-avatar">
-                                    <span>H</span>
-                                </div>
-                                <div class="testimonial-info">
-                                    <h4>Half -DeaD</h4>
-                                    <div class="stars">★★★★★</div>
-                                </div>
-                            </div>
-                            <p class="testimonial-text"></p>
-                            <span class="testimonial-date">7 miesięcy temu</span>
+                        <!-- Opinie ładowane dynamicznie przez testimonials-manager.js -->
+                        <div class="loading-testimonials">
+                            <i class="fas fa-spinner fa-spin"></i> Ładowanie opinii...
                         </div>
                     </div>
                 </section>
@@ -507,6 +456,7 @@
     <!-- Google Maps API - WAŻNE: Zabezpiecz klucz w Google Cloud Console! 
          Zobacz: SECURITY_GOOGLE_MAPS.md -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap" async defer></script>
+    <script src="testimonials-manager.js?v=1.0"></script>
     <script src="script.js?v=3.0"></script>
 </body>
 </html>

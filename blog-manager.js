@@ -352,7 +352,7 @@ class BlogManager {
             ${galleryHTML}
             
             <div class="portfolio-content">
-                <p>${post.description || post.content}</p>
+                <div class="post-body">${this.markdownToHTML(post.body || post.description || post.content || '')}</div>
                 ${featuresHTML}
                 ${tagsHTML}
                 
@@ -384,6 +384,43 @@ class BlogManager {
             'Lipca', 'Sierpnia', 'Września', 'Października', 'Listopada', 'Grudnia'
         ];
         return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
+    markdownToHTML(markdown) {
+        if (!markdown) return '';
+        
+        let html = markdown
+            // Headers
+            .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+            .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+            // Bold
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            // Italic
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            // Links
+            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+            // List items (zachowaj emoji na początku)
+            .replace(/^- (.*?)$/gm, '<li>$1</li>')
+            // Checkmarks ✅ and ❌
+            .replace(/✅/g, '<span style="color: #22c55e;">✅</span>')
+            .replace(/❌/g, '<span style="color: #ef4444;">❌</span>')
+            // Emoji icons 🔵 💡 ⚠️ 💰
+            .replace(/🔵/g, '<span style="font-size: 1.2em;">🔵</span>')
+            .replace(/💡/g, '<span style="color: #f59e0b; font-size: 1.2em;">💡</span>')
+            .replace(/⚠️/g, '<span style="color: #ef4444; font-size: 1.2em;">⚠️</span>')
+            .replace(/💰/g, '<span style="color: #10b981; font-size: 1.2em;">💰</span>')
+            // Paragraphs (double newline)
+            .replace(/\n\n/g, '</p><p>');
+
+        // Wrap consecutive list items in <ul>
+        html = html.replace(/(<li>.*?<\/li>\s*)+/gs, '<ul class="markdown-list">$&</ul>');
+        
+        // Wrap in paragraph if not already wrapped
+        if (!html.startsWith('<h') && !html.startsWith('<ul')) {
+            html = `<p>${html}</p>`;
+        }
+
+        return html;
     }
 
     updateFilterCounts() {

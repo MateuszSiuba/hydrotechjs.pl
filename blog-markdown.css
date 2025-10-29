@@ -1,0 +1,102 @@
+/* Dodatkowe style dla markdown w postach blogowych */
+.post-body {
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.post-body h2 {
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.post-body h3 {
+    font-size: 1.2rem;
+    margin: 1.2rem 0 0.6rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+body.dark-mode .post-body h2,
+body.dark-mode .post-body h3 {
+    color: var(--dark-accent);
+}
+
+.post-body p {
+    margin: 0.8rem 0;
+    line-height: 1.7;
+}
+
+.post-body strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.post-body .markdown-list {
+    list-style: none;
+    margin: 1rem 0;
+    padding-left: 0;
+}
+
+.post-body .markdown-list li {
+    padding: 0.5rem 0 0.5rem 1.8rem;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--border);
+}
+
+.post-body .markdown-list li:last-child {
+    border-bottom: none;
+}
+
+.post-body a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.post-body a:hover {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* Post author badge */
+.post-author {
+    font-size: 0.9rem;
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+}
+
+.post-author i {
+    color: var(--accent);
+    margin-right: 0.4rem;
+}
+
+/* Post tags */
+.post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.post-tags .tag {
+    background: rgba(77, 141, 181, 0.1);
+    color: var(--accent);
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid var(--accent);
+}
+
+body.dark-mode .post-tags .tag {
+    background: rgba(112, 196, 255, 0.15);
+    color: var(--dark-accent);
+    border-color: var(--dark-accent);
+}
+
+.post-tags .tag i {
+    font-size: 0.75rem;
+    margin-right: 0.3rem;
+}

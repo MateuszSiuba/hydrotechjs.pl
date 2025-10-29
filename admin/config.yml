@@ -29,3 +29,29 @@ collections:
           {label: "Alt", name: "alt", widget: "string"}
         ]}
       - {label: "Cechy projektu", name: "features", widget: "list", required: false, field: {label: "Cecha", name: "feature", widget: "string"}}
+
+  - name: "testimonials"
+    label: "Opinie Klientów"
+    folder: "testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Imię klienta", name: "name", widget: "string"}
+      - {label: "Ocena (1-5)", name: "rating", widget: "number", default: 5, value_type: "int", min: 1, max: 5}
+      - {label: "Treść opinii", name: "content", widget: "text"}
+      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Inicjał (1 litera)", name: "initial", widget: "string", pattern: ['^[A-Z]$', "Jedna wielka litera"], required: false}
+      - {label: "Wyróżniona?", name: "featured", widget: "boolean", default: false, required: false}
+      - {label: "Źródło", name: "source", widget: "select", options: ["Google", "Facebook", "Strona"], default: "Google"}
+
+  - name: "faq"
+    label: "FAQ - Pytania i Odpowiedzi"
+    folder: "faq"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Pytanie", name: "question", widget: "string"}
+      - {label: "Odpowiedź", name: "answer", widget: "markdown"}
+      - {label: "Kategoria", name: "category", widget: "select", options: ["Ogrzewanie", "Hydraulika", "Awarie", "Cennik", "Ogólne"]}
+      - {label: "Kolejność wyświetlania", name: "order", widget: "number", default: 1, value_type: "int"}
+      - {label: "Aktywne?", name: "active", widget: "boolean", default: true}

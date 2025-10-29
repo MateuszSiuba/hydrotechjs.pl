@@ -20,6 +20,37 @@ features:
 
 **Pytanie klienta:** "Planuję remont łazienki i zastanawiam się nad ogrzewaniem podłogowym. Czy to się opłaca?"
 
-Ogrzewanie podłogowe to świetna inwestycja, szczególnie w łazienkach! 
+Ogrzewanie podłogowe to świetna inwestycja, szczególnie w łazienkach! Oto dlaczego:
 
-**💡 Nasza rada:** Montaż ogrzewania podłogowego najlepiej wykonać podczas remontu kapitalnego. Inwestycja zwraca się w ciągu kilku lat dzięki oszczędnościom energii.
+## ✅ Zalety ogrzewania podłogowego w łazience
+
+**Komfort na najwyższym poziomie**  
+Wyobraź sobie ciepłą podłogę pod stopami zaraz po wyjściu z prysznica - to prawdziwa przyjemność, szczególnie zimą!
+
+**Równomierne rozprowadzenie ciepła**  
+W przeciwieństwie do tradycyjnych grzejników, ciepło rozchodzi się równomiernie od podłogi ku górze. Nie ma zimnych stref, cała łazienka jest przyjemnie ogrzana.
+
+**Więcej miejsca i estetyka**  
+Brak grzejnika na ścianie = więcej miejsca na meble i dekoracje. Minimalistyczny, nowoczesny wygląd.
+
+**Oszczędność energii**  
+Ogrzewanie podłogowe pracuje przy niższej temperaturze (28-32°C) niż tradycyjne grzejniki (60-70°C), co przekłada się na niższe rachunki.
+
+**Szybsze wysychanie łazienki**  
+Ciepła podłoga przyspiesza parowanie wody, co zmniejsza wilgoć i ryzyko powstawania pleśni.
+
+## � Czy to się opłaca?
+
+**Koszt inwestycji:** 100-200 zł/m² (zależy od systemu)  
+**Zwrot inwestycji:** 3-5 lat dzięki oszczędnościom energii  
+**Żywotność:** 30-50 lat (praktycznie bezobsługowy system)
+
+## ⚠️ Kiedy NIE warto?
+
+- Jeśli nie planujesz remontu (instalacja wymaga rozebrania podłogi)
+- Przy bardzo niskich sufitach (system podnosi poziom podłogi o 5-8 cm)
+- W pomieszczeniach rzadko używanych
+
+**�💡 Nasza rada:** Montaż ogrzewania podłogowego najlepiej wykonać podczas remontu kapitalnego łazienki. Inwestycja zwraca się w ciągu kilku lat dzięki oszczędnościom energii, a komfort użytkowania jest nieporównywalny z tradycyjnymi grzejnikami!
+
+Chcesz wycenę dla swojej łazienki? Zadzwoń: **+48 502 313 419**
