@@ -1,10 +1,6 @@
 backend:
-  name: github
-  repo: MateuszSiuba/hydrotechjs.pl
+  name: git-gateway
   branch: main
-
-# Lokalny development (odkomentuj gdy pracujesz lokalnie)
-# local_backend: true
 
 media_folder: "attachments"
 public_folder: "/attachments"
