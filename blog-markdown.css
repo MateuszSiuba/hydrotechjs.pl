@@ -18,9 +18,12 @@
     font-weight: 600;
 }
 
-body.dark-mode .post-body h2,
+body.dark-mode .post-body h2 {
+    color: #5eb9ff !important;
+}
+
 body.dark-mode .post-body h3 {
-    color: var(--dark-accent);
+    color: #d0e8ff !important;
 }
 
 .post-body p {
@@ -31,6 +34,10 @@ body.dark-mode .post-body h3 {
 .post-body strong {
     color: var(--primary);
     font-weight: 600;
+}
+
+body.dark-mode .post-body strong {
+    color: #5eb9ff !important;
 }
 
 .post-body .markdown-list {
@@ -99,4 +106,145 @@ body.dark-mode .post-tags .tag {
 .post-tags .tag i {
     font-size: 0.75rem;
     margin-right: 0.3rem;
+}
+
+/* Fix testimonials section overflow on mobile */
+.testimonials-section {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+}
+
+.testimonials-section .section-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Fix Google Reviews widget responsiveness */
+.google-reviews-widget {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center !important;
+    padding: 1rem !important;
+    max-width: 100% !important;
+    width: calc(100vw - 2rem) !important;
+    box-sizing: border-box !important;
+    margin: 2rem auto 2.5rem !important;
+    justify-content: center !important;
+}
+
+/* Extra fix for small screens */
+@media (max-width: 480px) {
+    .google-reviews-widget {
+        padding: 0.75rem !important;
+        margin: 1.5rem auto !important;
+        border-radius: 8px !important;
+        width: calc(100vw - 2rem) !important;
+    }
+    
+    .widget-header {
+        font-size: 0.9rem !important;
+    }
+    
+    .widget-link {
+        padding: 0.6rem 0.8rem !important;
+        font-size: 0.85rem !important;
+        max-width: none !important;
+        white-space: normal !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .google-reviews-widget {
+        flex-direction: row !important;
+        text-align: left !important;
+        padding: 1.5rem !important;
+    }
+}
+
+.widget-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+}
+
+@media (min-width: 768px) {
+    .widget-header {
+        flex-direction: row !important;
+        width: auto !important;
+        gap: 1rem !important;
+    }
+}
+
+.widget-header .fab.fa-google {
+    font-size: 2.5rem !important;
+}
+
+@media (min-width: 768px) {
+    .widget-header .fab.fa-google {
+        font-size: 3rem !important;
+    }
+}
+
+.widget-header h3 {
+    font-size: 1.1rem !important;
+}
+
+@media (min-width: 768px) {
+    .widget-header h3 {
+        font-size: 1.3rem !important;
+    }
+}
+
+.rating-summary {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+}
+
+@media (min-width: 768px) {
+    .rating-summary {
+        justify-content: flex-start !important;
+    }
+}
+
+.widget-link {
+    width: 100% !important;
+    max-width: 200px !important;
+    text-align: center !important;
+    padding: 0.6rem 1rem !important;
+    font-size: 0.9rem !important;
+}
+
+@media (min-width: 768px) {
+    .widget-link {
+        width: auto !important;
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* Fix map on mobile - prevent bottom cutoff */
+@media (max-width: 768px) {
+    .contact-map {
+        height: 400px !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    #map {
+        height: 100% !important;
+        min-height: 400px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-map {
+        height: 350px !important;
+    }
+    
+    #map {
+        min-height: 350px !important;
+    }
 }
