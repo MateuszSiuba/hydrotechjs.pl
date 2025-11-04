@@ -237,6 +237,14 @@ body.dark-mode .post-tags .tag {
         height: 100% !important;
         min-height: 400px !important;
     }
+    
+    /* Move theme toggle to bottom left on mobile to avoid header overlap */
+    .theme-toggle {
+        top: auto !important;
+        bottom: 2rem !important;
+        left: 2rem !important;
+        right: auto !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -246,5 +254,11 @@ body.dark-mode .post-tags .tag {
     
     #map {
         min-height: 350px !important;
+    }
+    
+    /* Keep theme toggle in bottom left on small screens */
+    .theme-toggle {
+        bottom: 6rem !important;
+        left: 1rem !important;
     }
 }
