@@ -230,7 +230,7 @@ body.dark-mode .post-tags .tag {
 @media (max-width: 768px) {
     .contact-map {
         height: 400px !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: 0 !important;
     }
     
     #map {
@@ -242,7 +242,7 @@ body.dark-mode .post-tags .tag {
     .theme-toggle {
         top: auto !important;
         bottom: 2rem !important;
-        left: 2rem !important;
+        left: 1rem !important;
         right: auto !important;
     }
 }
@@ -256,9 +256,19 @@ body.dark-mode .post-tags .tag {
         min-height: 350px !important;
     }
     
-    /* Keep theme toggle in bottom left on small screens */
+    /* Keep theme toggle in bottom left on small screens - same level as scroll-to-top */
     .theme-toggle {
-        bottom: 6rem !important;
+        bottom: 2rem !important;
         left: 1rem !important;
     }
+}
+
+/* Fix weird gap/bar before footer */
+main {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.main-footer {
+    margin-top: 0 !important;
 }

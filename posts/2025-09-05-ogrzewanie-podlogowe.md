@@ -41,8 +41,8 @@ Ciepła podłoga przyspiesza parowanie wody, co zmniejsza wilgoć i ryzyko powst
 
 ## � Czy to się opłaca?
 
-**Koszt inwestycji:** 100-200 zł/m² (zależy od systemu)  
-**Zwrot inwestycji:** 3-5 lat dzięki oszczędnościom energii  
+**Koszt inwestycji:** 200-500 zł/m² (zależy od systemu)  
+**Zwrot inwestycji:** 5-8 lat dzięki oszczędnościom energii  
 **Żywotność:** 30-50 lat (praktycznie bezobsługowy system)
 
 ## ⚠️ Kiedy NIE warto?
