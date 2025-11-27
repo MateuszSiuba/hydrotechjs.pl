@@ -7,7 +7,7 @@ description: Kompleksowy montaż nowoczesnej kotłowni z pompą ciepła EKOSOL M
   kotłem gazowym STALMARK w nowo budowanym domu jednorodzinnym.
 seo_description: Profesjonalny montaż kotłowni gazowej z pompą ciepła - zasobnik
   KOSPEL, naczynie wzbiorcze, filtr, automatyka. Realizacja HydroTech J&S.
-featured_image: /attachments/kotlownia4.jpeg
+featured_image: ""
 author: HydroTech J&S
 tags:
   - kotłownia
