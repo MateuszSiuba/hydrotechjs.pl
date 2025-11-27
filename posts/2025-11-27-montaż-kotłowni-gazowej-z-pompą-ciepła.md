@@ -2,7 +2,7 @@
 title: Montaż kotłowni gazowej z pompą ciepła
 date: 2025-11-18T14:33:00.000+01:00
 category: realizacje
-status: draft
+status: published
 description: Kompleksowy montaż nowoczesnej kotłowni z pompą ciepła EKOSOL MC i
   kotłem gazowym STALMARK w nowo budowanym domu jednorodzinnym.
 seo_description: Profesjonalny montaż kotłowni gazowej z pompą ciepła - zasobnik
