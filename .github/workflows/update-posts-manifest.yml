@@ -1,0 +1,59 @@
+name: Update Posts Manifest
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'posts/**'
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Update posts.json manifest
+        run: |
+          cd posts
+          
+          # Get all .md files, sort by date (newest first), create JSON array
+          echo "[" > posts.json
+          
+          ls -1 *.md 2>/dev/null | grep -v "posts.json" | sort -r | while IFS= read -r file; do
+            echo "  { \"file\": \"$file\" }," >> posts.json
+          done
+          
+          # Remove trailing comma from last entry
+          sed -i '$ s/,$//' posts.json
+          
+          echo "]" >> posts.json
+          
+          # Pretty print JSON
+          if command -v jq &> /dev/null; then
+            jq '.' posts.json > posts.json.tmp && mv posts.json.tmp posts.json
+          fi
+      
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code posts/posts.json || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push if changed
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add posts/posts.json
+          git commit -m "Auto-update posts.json manifest [skip ci]"
+          git push
