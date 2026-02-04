@@ -280,14 +280,14 @@ function initMap() {
 // Globalnie dostępna funkcja dla Google Maps callback
 window.initMap = initMap;
 
-// Lazy-load Google Maps na stronie kontaktu
+// Lazy-load Google Maps (kontakt + strona główna)
 const initLazyMap = () => {
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
 
-    const wrapper = mapElement.closest('.map-wrapper');
-    const fallback = wrapper ? wrapper.querySelector('.map-fallback') : null;
-    const loadBtn = wrapper ? wrapper.querySelector('.map-load-btn') : null;
+    const wrapper = mapElement.closest('.map-wrapper') || mapElement;
+    const fallback = wrapper !== mapElement ? wrapper.querySelector('.map-fallback') : null;
+    const loadBtn = wrapper !== mapElement ? wrapper.querySelector('.map-load-btn') : null;
 
     const loadMap = () => {
         if (mapElement.dataset.mapLoaded === 'true') return;
@@ -303,7 +303,7 @@ const initLazyMap = () => {
         const script = document.createElement('script');
         script.async = true;
         script.defer = true;
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap&loading=async';
         document.head.appendChild(script);
     };
 
@@ -320,6 +320,8 @@ const initLazyMap = () => {
         }, { rootMargin: '200px' });
 
         observer.observe(wrapper);
+    } else {
+        loadMap();
     }
 };
 

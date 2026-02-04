@@ -57,6 +57,10 @@
         @media (max-width:480px){
             .hero-content h1{font-size:1.3rem;margin-bottom:.5rem}
         }
+        .map-wrapper{position:relative}
+        .map-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:rgba(0,0,0,.35);color:#fff;text-align:center;padding:1.5rem;backdrop-filter:blur(2px)}
+        .map-load-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.75rem 1.25rem;font-weight:600;cursor:pointer}
+        .map-fallback a{color:#fff;text-decoration:underline}
     </style>
     
     <!-- Structured Data - Schema.org -->
@@ -466,7 +470,14 @@
                         </div>
                     </div>
                     <div class="contact-map">
-                        <div id="map"></div>
+                        <div class="map-wrapper">
+                            <div id="map" data-map-loaded="false"></div>
+                            <div class="map-fallback">
+                                <p>Mapa ładuje się po kliknięciu lub przewinięciu do sekcji.</p>
+                                <button class="map-load-btn" type="button">Załaduj mapę</button>
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=52.678606,14.847574" target="_blank" rel="noopener noreferrer">Otwórz w Google Maps</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -509,6 +520,6 @@
     </footer>
 
         <!-- Google Maps API ładowany tylko na stronie kontaktu -->
-    <script src="script.js?v=3.0"></script>
+    <script src="script.js?v=3.1"></script>
 </body>
 </html>
