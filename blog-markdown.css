@@ -4,6 +4,68 @@
     color: var(--text);
 }
 
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.related-card {
+    display: block;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card-bg);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.related-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.related-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--primary);
+}
+
+.related-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin: 0;
+}
+
+.post-related-links {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin: 0 0 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,.3);
+}
+
+.portfolio-featured-image {
+    aspect-ratio: 16 / 9;
+    background: var(--card-bg);
+}
+
+.portfolio-featured-image picture,
+.portfolio-featured-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
 .post-body h2 {
     font-size: 1.4rem;
     margin: 1.5rem 0 0.8rem;
@@ -136,6 +198,11 @@ body.dark-mode .post-tags .tag {
 
 /* Extra fix for small screens */
 @media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+
     .google-reviews-widget {
         padding: 0.75rem !important;
         margin: 1.5rem auto !important;
@@ -160,6 +227,31 @@ body.dark-mode .post-tags .tag {
         flex-direction: row !important;
         text-align: left !important;
         padding: 1.5rem !important;
+    }
+}
+
+/* Hero spacing overrides to avoid overlap with sticky header */
+.hero-section {
+    padding: 5rem 0 3rem;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 4.5rem 0 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 4rem 0 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
     }
 }
 

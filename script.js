@@ -44,10 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Dark mode wlaczenie
-const themeToggle = document.createElement('button');
-themeToggle.className = 'theme-toggle';
-themeToggle.innerHTML = '🌓';
-document.body.appendChild(themeToggle);
+const themeToggle = document.querySelector('.theme-toggle') || (() => {
+    const btn = document.createElement('button');
+    btn.className = 'theme-toggle';
+    btn.innerHTML = '🌓';
+    document.body.appendChild(btn);
+    return btn;
+})();
 
 themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
@@ -61,6 +64,23 @@ if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
 }
 
+// Google Analytics - ładuj dopiero po zgodzie
+const loadAnalytics = () => {
+    if (window.gtagLoaded) return;
+    window.gtagLoaded = true;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-B3JM0G3ZD6';
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-B3JM0G3ZD6');
+};
+
 // Ciasteczka
 const cookieContainer = document.querySelector('.cookie-container');
 const cookieAccept = document.querySelector('.cookie-accept');
@@ -72,13 +92,19 @@ setTimeout(() => {
     }
 }, 2000);
 
+if (localStorage.getItem('cookieAccepted') === 'true') {
+    loadAnalytics();
+}
+
 cookieAccept.addEventListener('click', () => {
     localStorage.setItem('cookieAccepted', 'true');
     cookieContainer.classList.remove('active');
+    loadAnalytics();
 });
 
 cookieReject.addEventListener('click', () => {
     cookieContainer.classList.remove('active');
+    localStorage.setItem('cookieAccepted', 'false');
 });
 
 // Scrool
@@ -253,6 +279,51 @@ function initMap() {
 
 // Globalnie dostępna funkcja dla Google Maps callback
 window.initMap = initMap;
+
+// Lazy-load Google Maps na stronie kontaktu
+const initLazyMap = () => {
+    const mapElement = document.getElementById('map');
+    if (!mapElement) return;
+
+    const wrapper = mapElement.closest('.map-wrapper');
+    const fallback = wrapper ? wrapper.querySelector('.map-fallback') : null;
+    const loadBtn = wrapper ? wrapper.querySelector('.map-load-btn') : null;
+
+    const loadMap = () => {
+        if (mapElement.dataset.mapLoaded === 'true') return;
+        mapElement.dataset.mapLoaded = 'true';
+
+        if (fallback) fallback.style.display = 'none';
+
+        if (window.google && window.google.maps) {
+            initMap();
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.defer = true;
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap';
+        document.head.appendChild(script);
+    };
+
+    if (loadBtn) {
+        loadBtn.addEventListener('click', loadMap);
+    }
+
+    if ('IntersectionObserver' in window && wrapper) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries.some(entry => entry.isIntersecting)) {
+                loadMap();
+                observer.disconnect();
+            }
+        }, { rootMargin: '200px' });
+
+        observer.observe(wrapper);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', initLazyMap);
 
 // Animacje
 const animateOnScroll = () => {

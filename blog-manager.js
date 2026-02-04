@@ -162,9 +162,13 @@ class BlogManager {
         if (this.searchQuery) {
             const query = this.searchQuery.toLowerCase();
             posts = posts.filter(post => {
-                return post.title.toLowerCase().includes(query) ||
-                       post.description.toLowerCase().includes(query) ||
-                       post.content.toLowerCase().includes(query) ||
+                const title = (post.title || '').toLowerCase();
+                const description = (post.description || '').toLowerCase();
+                const content = (post.body || post.content || '').toLowerCase();
+
+                return title.includes(query) ||
+                       description.includes(query) ||
+                       content.includes(query) ||
                        (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query)));
             });
         }
@@ -265,22 +269,26 @@ class BlogManager {
             'pytania': 'Pytania'
         }[post.category] || post.category;
 
+        const maxImages = 4;
+        const hasGallery = Array.isArray(post.gallery) && post.gallery.length > 0;
+        const showFeatured = Boolean(post.featured_image) && !hasGallery;
         let featuredImageHTML = '';
-        if (post.featured_image) {
+        if (showFeatured) {
             featuredImageHTML = `
                 <div class="portfolio-featured-image">
-                    <img src="${post.featured_image}" alt="${post.title}" loading="lazy">
+                    ${this.buildResponsiveImage(post.featured_image, post.title)}
                 </div>
             `;
         }
 
         let galleryHTML = '';
         if (post.gallery && post.gallery.length > 0) {
+            const galleryLimit = maxImages;
             const galleryCount = post.gallery.length;
             let galleryClass = 'portfolio-gallery';
             
-            // Ogranicz do maksymalnie 4 zdjęć (grid 2x2)
-            const galleryItems = post.gallery.slice(0, 4);
+            // Ogranicz liczbę zdjęć do max 4
+            const galleryItems = post.gallery.slice(0, galleryLimit);
             
             console.log(`Post: ${post.title}, Gallery items: ${galleryCount} (showing ${galleryItems.length})`, post.gallery);
             
@@ -308,9 +316,9 @@ class BlogManager {
                         
                         if (isVideo) {
                             return `<video src="${item.image}" controls muted preload="metadata" title="${item.alt || 'Video'}"></video>`;
-                        } else {
-                            return `<img src="${item.image}" alt="${item.alt}" loading="lazy">`;
                         }
+
+                        return this.buildResponsiveImage(item.image, item.alt || '');
                     }).join('')}
                 </div>
             `;
@@ -338,14 +346,17 @@ class BlogManager {
             `;
         }
 
+        const postUrl = `/posts/${post.filename.replace(/\.md$/i, '.html')}`;
+
         article.innerHTML = `
             <div class="portfolio-header">
                 <div class="portfolio-meta">
                     <time datetime="${post.date}">${this.formatDate(post.date)}</time>
                     <span class="portfolio-category">${categoryLabel}</span>
                 </div>
-                <h3>${post.title}</h3>
+                <h3><a class="post-title-link" href="${postUrl}">${post.title}</a></h3>
                 ${post.author ? `<p class="post-author"><i class="fas fa-user"></i> ${post.author}</p>` : ''}
+                <a class="post-readmore" href="${postUrl}">Czytaj więcej</a>
             </div>
             
             ${featuredImageHTML}
@@ -375,6 +386,33 @@ class BlogManager {
         `;
 
         return article;
+    }
+
+    buildResponsiveImage(imagePath, altText) {
+        if (!imagePath) return '';
+
+        const lower = imagePath.toLowerCase();
+        if (lower.endsWith('.webp') || lower.endsWith('.avif')) {
+            return `<img src="${imagePath}" alt="${altText}" loading="lazy">`;
+        }
+
+        const extMatch = imagePath.match(/\.(\w+)(\?.*)?$/);
+        if (!extMatch) {
+            return `<img src="${imagePath}" alt="${altText}" loading="lazy">`;
+        }
+
+        const basePath = imagePath.replace(/\.(\w+)(\?.*)?$/, '');
+        const sizes = [480, 768, 1200];
+        const avifSrcset = sizes.map(size => `${encodeURI(`${basePath}-${size}.avif`)} ${size}w`).join(', ');
+        const webpSrcset = sizes.map(size => `${encodeURI(`${basePath}-${size}.webp`)} ${size}w`).join(', ');
+
+        return `
+            <picture>
+                <source type="image/avif" srcset="${avifSrcset}" sizes="(max-width: 768px) 100vw, 1200px">
+                <source type="image/webp" srcset="${webpSrcset}" sizes="(max-width: 768px) 100vw, 1200px">
+                <img src="${imagePath}" alt="${altText}" loading="lazy">
+            </picture>
+        `;
     }
 
     formatDate(dateString) {

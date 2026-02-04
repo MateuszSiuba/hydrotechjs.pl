@@ -4,20 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3JM0G3ZD6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-B3JM0G3ZD6');
-    </script>
+    <!-- Google tag (gtag.js) ładowany po zgodzie cookies w script.js -->
 
     <!-- Primary Meta Tags -->
     <title>Blog Hydrauliczny - Porady, Realizacje | HydroTech J&S</title>
     <meta name="title" content="Blog Hydrauliczny - Porady, Realizacje | HydroTech J&S">
-    <meta name="description" content="� Blog hydrauliczny: porady ekspertów, realizacje projektów, odpowiedzi na pytania. Praktyczna wiedza o instalacjach CO, hydraulice i awariach.">
+    <meta name="description" content="Blog hydrauliczny: porady ekspertów, realizacje projektów, odpowiedzi na pytania. Praktyczna wiedza o instalacjach CO, hydraulice i awariach.">
     <meta name="keywords" content="blog hydrauliczny, porady hydraulik, realizacje instalacje CO, pytania hydrauliczne, poradnik hydraulika, hydraulik Witnica blog">
     <meta name="author" content="HydroTech J&S">
     <meta name="robots" content="index, follow, max-image-preview:large">
@@ -37,6 +29,9 @@
     
     <!-- Canonical -->
     <link rel="canonical" href="https://hydrotechjs.pl/blog.html">
+
+    <!-- Preload hero background for LCP -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1584622650111-993a426fbf0a">
     
     <!-- Schema.org for Image Gallery -->
     <script type="application/ld+json">
@@ -58,6 +53,12 @@
     <link rel="stylesheet" href="podstrony.css?v=3.0">
     <link rel="stylesheet" href="zlecena.css?v=3.0">
     <link rel="stylesheet" href="blog-markdown.css?v=1.0">
+    <style>
+        .post-title-link { color: #4c89af; text-decoration: none; }
+        .post-title-link:hover { color: var(--accent); }
+        .post-readmore { display: inline-flex; align-items: center; gap: .5rem; margin-top: .5rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+        .post-readmore:hover { color: var(--primary); }
+    </style>
 </head>
 <body>
     <div class="cookie-container">
@@ -76,7 +77,7 @@
 
     <header class="main-header">
         <div class="header-wrapper">
-            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <div class="logo">Hydro<span>Tech J&S</span></div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="index.html"><i class="fas fa-home"></i> Strona Główna</a></li>
@@ -101,7 +102,7 @@
         <section class="hero-section">
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h2>Blog HydroTech J&S</h2>
+                    <h1>Blog HydroTech J&S</h1>
                     <p>Porady ekspertów, realizacje projektów i odpowiedzi na Wasze pytania</p>
                     <p class="hero-stats">
                         <span><i class="fas fa-lightbulb"></i> Praktyczna wiedza</span>
@@ -159,11 +160,11 @@
             <div class="footer-section">
                 <h4>Social Media</h4>
                 <div class="social-media">
-                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="social-link">
+                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-facebook-f"></i>
                         Facebook
                     </a>
-                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-link">
+                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-google"></i>
                         Google
                     </a>
@@ -178,7 +179,7 @@
         </div>
     </footer>
 
-    <script src="blog-manager.js?v=1.0"></script>
+    <script src="blog-manager.js?v=1.2"></script>
     <script src="script.js?v=3.0"></script>
 </body>
 </html>

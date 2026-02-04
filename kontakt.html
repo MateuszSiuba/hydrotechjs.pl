@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3JM0G3ZD6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-B3JM0G3ZD6');
-    </script>
+    <!-- Google tag (gtag.js) ładowany po zgodzie cookies w script.js -->
     
     <!-- Primary Meta Tags -->
     <title>Kontakt - Hydraulik Witnica | HydroTech J&S ☎ 502 313 419</title>
@@ -42,12 +34,19 @@
     <!-- Preconnect -->
     <link rel="preconnect" href="https://maps.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1584622650111-993a426fbf0a">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=3.1">
     <link rel="stylesheet" href="podstrony.css?v=3.1">
     <link rel="stylesheet" href="blog-markdown.css?v=1.1">
+    <style>
+        .map-wrapper{position:relative}
+        .map-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:rgba(0,0,0,.35);color:#fff;text-align:center;padding:1.5rem;backdrop-filter:blur(2px)}
+        .map-load-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:.75rem 1.25rem;font-weight:600;cursor:pointer}
+        .map-fallback a{color:#fff;text-decoration:underline}
+    </style>
     
     <!-- Schema.org for Contact Page -->
     <script type="application/ld+json">
@@ -108,7 +107,7 @@
 
     <header class="main-header">
         <div class="header-wrapper">
-            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <div class="logo">Hydro<span>Tech J&S</span></div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="index.html"><i class="fas fa-home"></i> Strona Główna</a></li>
@@ -133,7 +132,7 @@
         <section class="hero-section">
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h2>Kontakt</h2>
+                    <h1>Kontakt</h1>
                     <p>Skontaktuj się z nami</p>
                 </div>
             </div>
@@ -163,7 +162,7 @@
                         <span class="btn-label">Odpowiedź w 24h</span>
                     </a>
                     
-                    <a href="https://wa.me/48502313419" target="_blank" class="quick-contact-btn whatsapp">
+                    <a href="https://wa.me/48502313419" target="_blank" rel="noopener noreferrer" class="quick-contact-btn whatsapp">
                         <div class="quick-icon">
                             <i class="fab fa-whatsapp"></i>
                         </div>
@@ -172,7 +171,7 @@
                         <span class="btn-label">Dostępne 24/7</span>
                     </a>
                     
-                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="quick-contact-btn messenger">
+                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer" class="quick-contact-btn messenger">
                         <div class="quick-icon">
                             <i class="fab fa-facebook-messenger"></i>
                         </div>
@@ -333,11 +332,11 @@
                                 <h4>Social Media</h4>
                             </div>
                             <div class="social-links">
-                                <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="social-btn facebook">
+                                <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer" class="social-btn facebook">
                                     <i class="fab fa-facebook-f"></i>
                                     <span>Facebook</span>
                                 </a>
-                                <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-btn google">
+                                <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="social-btn google">
                                     <i class="fab fa-google"></i>
                                     <span>Google</span>
                                 </a>
@@ -353,8 +352,24 @@
             <div class="section-container">
                 <h2 class="section-title">Gdzie nas znaleźć?</h2>
                 <div class="map-wrapper">
-                    <div id="map"></div>
+                    <div id="map" data-map-loaded="false"></div>
+                    <div class="map-fallback">
+                        <p>Mapa ładuje się po kliknięciu lub przewinięciu do sekcji.</p>
+                        <button class="map-load-btn" type="button">Załaduj mapę</button>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=52.678606,14.847574" target="_blank" rel="noopener noreferrer">Otwórz w Google Maps</a>
+                    </div>
                 </div>
+                <noscript>
+                    <iframe
+                        title="Mapa HydroTech J&S"
+                        src="https://www.google.com/maps?q=52.678606,14.847574&z=15&output=embed"
+                        width="100%"
+                        height="350"
+                        style="border:0; margin-top: 1rem;"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </noscript>
             </div>
         </section>
         
@@ -426,11 +441,11 @@
             <div class="footer-section">
                 <h4>Social Media</h4>
                 <div class="social-media">
-                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="social-link">
+                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-facebook-f"></i>
                         Facebook
                     </a>
-                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-link">
+                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-google"></i>
                         Google
                     </a>
@@ -445,9 +460,6 @@
         </div>
     </footer>
 
-    <!-- Google Maps API - WAŻNE: Zabezpiecz klucz w Google Cloud Console! 
-         Zobacz: SECURITY_GOOGLE_MAPS.md -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap" async defer></script>
     <script src="script.js?v=3.0"></script>
 </body>
 </html>

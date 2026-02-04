@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3JM0G3ZD6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-B3JM0G3ZD6');
-    </script>
+    <!-- Google tag (gtag.js) ładowany po zgodzie cookies w script.js -->
     
     <!-- Primary Meta Tags -->
     <title>Usługi Hydrauliczne Witnica | HydroTech J&S</title>
@@ -35,6 +27,7 @@
     
     <!-- Preconnect -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1584622650111-993a426fbf0a">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -109,7 +102,7 @@
 
     <header class="main-header">
         <div class="header-wrapper">
-            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <div class="logo">Hydro<span>Tech J&S</span></div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="index.html"><i class="fas fa-home"></i> Strona Główna</a></li>
@@ -134,7 +127,7 @@
         <section class="hero-section">
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h2>Nasze Usługi</h2>
+                    <h1>Nasze Usługi</h1>
                     <p>Kompleksowe rozwiązania hydrauliczne</p>
                 </div>
             </div>
@@ -273,6 +266,31 @@
             </div>
         </section>
 
+        <section class="services-related">
+            <div class="section-container">
+                <h2 class="section-title">Powiązane realizacje</h2>
+                <p class="section-subtitle">Zobacz wybrane wpisy z naszych realizacji</p>
+                <div class="related-grid">
+                    <a class="related-card" href="posts/2026-01-04-kotlownia-kociol-stalmark-plus-odzelaziacz.html">
+                        <h3>Kotłownia: kocioł Stalmark + odżelaziacz</h3>
+                        <p>Realizacja kotłowni z uzdatnianiem wody.</p>
+                    </a>
+                    <a class="related-card" href="posts/2025-11-04-montaz-ogrzewania-podlogowego-nowe-mieszkanie.html">
+                        <h3>Ogrzewanie podłogowe – nowe mieszkanie</h3>
+                        <p>Montaż instalacji CO i rozdzielaczy.</p>
+                    </a>
+                    <a class="related-card" href="posts/2025-08-10-wymiana-grzejnikow.html">
+                        <h3>Wymiana grzejników</h3>
+                        <p>Szybka modernizacja instalacji grzewczej.</p>
+                    </a>
+                    <a class="related-card" href="posts/2025-06-10-system-nawadniania.html">
+                        <h3>System nawadniania</h3>
+                        <p>Montaż automatyki i podłączeń.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Sekcja Akordeon z dodatkowymi informacjami -->
         <section class="service-accordion-section">
             <div class="section-container">
@@ -338,11 +356,11 @@
             <div class="footer-section">
                 <h4>Social Media</h4>
                 <div class="social-media">
-                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="social-link">
+                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-facebook-f"></i>
                         Facebook
                     </a>
-                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-link">
+                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-google"></i>
                         Google
                     </a>

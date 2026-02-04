@@ -1,37 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    
-    <!-- Strona główna -->
-    <url>
-        <loc>https://hydrotechjs.pl/</loc>
-        <lastmod>2025-10-28</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    
-    <!-- Usługi -->
-    <url>
-        <loc>https://hydrotechjs.pl/uslugi.html</loc>
-        <lastmod>2025-10-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    
-    <!-- Blog -->
-    <url>
-        <loc>https://hydrotechjs.pl/blog.html</loc>
-        <lastmod>2025-10-28</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <!-- Kontakt -->
-    <url>
-        <loc>https://hydrotechjs.pl/kontakt.html</loc>
-        <lastmod>2025-10-28</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
+
+  <url>
+    <loc>https://hydrotechjs.pl/</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/uslugi.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/blog.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/kontakt.html</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2026-01-04-kotlownia-kociol-stalmark-plus-odzelaziacz.html</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-12-22-przeglad-kotla-i-uzdatniania-wody.html</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-11-27-monta%C5%BC-kot%C5%82owni-gazowej-z-pomp%C4%85-ciep%C5%82a.html</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-11-04-montaz-ogrzewania-podlogowego-nowe-mieszkanie.html</loc>
+    <lastmod>2025-11-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-09-15-jak-przygotowac-dom-do-zimy.html</loc>
+    <lastmod>2025-09-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-09-05-ogrzewanie-podlogowe.html</loc>
+    <lastmod>2025-09-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-08-10-wymiana-grzejnikow.html</loc>
+    <lastmod>2025-08-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-07-28-oznaki-wymiany-bojlera.html</loc>
+    <lastmod>2025-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-07-22-wymiana-instalacji-bojler.html</loc>
+    <lastmod>2025-07-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-06-10-system-nawadniania.html</loc>
+    <lastmod>2025-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-06-05-hydrofornia-czy-pompa.html</loc>
+    <lastmod>2025-06-05</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-05-15-ogrzewanie-podlogowe-montaz.html</loc>
+    <lastmod>2025-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hydrotechjs.pl/posts/2025-04-28-modernizacja-hydroforni.html</loc>
+    <lastmod>2025-04-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>

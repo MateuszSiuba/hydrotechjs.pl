@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3JM0G3ZD6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-B3JM0G3ZD6');
-    </script>
+    <!-- Google tag (gtag.js) ładowany po zgodzie cookies w script.js -->
     
     <!-- Primary Meta Tags -->
     <title>HydroTech J&S - Hydraulik Witnica | Awarie 24h | Instalacje CO</title>
@@ -50,11 +42,22 @@
     <!-- Preconnect dla lepszej wydajności -->
     <link rel="preconnect" href="https://maps.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1584622650111-993a426fbf0a">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=3.0">
     <link rel="stylesheet" href="blog-markdown.css?v=1.1">
+    <style>
+        .hero-section{padding:5rem 0 3rem;}
+        .hero-content h1{font-size:3rem;color:#fff;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
+        @media (max-width:768px){
+            .hero-content h1{font-size:1.6rem;line-height:1.2;margin-bottom:.75rem}
+        }
+        @media (max-width:480px){
+            .hero-content h1{font-size:1.3rem;margin-bottom:.5rem}
+        }
+    </style>
     
     <!-- Structured Data - Schema.org -->
     <script type="application/ld+json">
@@ -227,7 +230,7 @@
 
     <header class="main-header">
         <div class="header-wrapper">
-            <h1 class="logo">Hydro<span>Tech J&S</span></h1>
+            <div class="logo">Hydro<span>Tech J&S</span></div>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="uslugi.html"><i class="fas fa-tools"></i> Usługi</a></li>
@@ -242,7 +245,7 @@
         <section class="hero-section">
             <div class="hero-overlay">
                 <div class="hero-content">
-                    <h2>Profesjonalne usługi hydrauliczne</h2>
+                    <h1>Profesjonalne usługi hydrauliczne</h1>
                     <p>24h/7 - Gwarancja jakości - Szybka interwencja</p>
                     <div class="hero-buttons">
                         <a href="uslugi.html" class="cta-button primary">
@@ -363,7 +366,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="widget-link">
+                        <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="widget-link">
                             Napisz opinię
                         </a>
                     </div>
@@ -486,11 +489,11 @@
             <div class="footer-section">
                 <h4>Social Media</h4>
                 <div class="social-media">
-                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" class="social-link">
+                    <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-facebook-f"></i>
                         Facebook
                     </a>
-                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" class="social-link">
+                    <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer" class="social-link">
                         <i class="fab fa-google"></i>
                         Google
                     </a>
@@ -505,9 +508,7 @@
         </div>
     </footer>
 
-    <!-- Google Maps API - WAŻNE: Zabezpiecz klucz w Google Cloud Console! 
-         Zobacz: SECURITY_GOOGLE_MAPS.md -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUs4Cd5wMZn1ZpKVWUpx3S9zcDgYbv9Q&callback=initMap" async defer></script>
+        <!-- Google Maps API ładowany tylko na stronie kontaktu -->
     <script src="script.js?v=3.0"></script>
 </body>
 </html>
