@@ -6,70 +6,12 @@ const { class: className = '' } = Astro.props;
 ---
 
 <div class:list={["relative rounded-2xl overflow-hidden shadow-sm border border-gray-100 h-full min-h-[320px]", className]} id="map-container" role="region" aria-label="Mapa lokalizacji HydroTech J&S">
-  <div id="map" class="w-full h-full absolute inset-0 bg-primary-50" role="application" aria-label="Mapa Google"></div>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2400!2d14.847574!3d52.678606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDQwJzQzLjAiTiAxNMKwNTAnNTEuMyJF!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
+    class="w-full h-full absolute inset-0 border-0"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    title="Mapa lokalizacji HydroTech J&S"
+  ></iframe>
 </div>
-
-<script>
-  function initMapOnElement(mapEl: HTMLElement) {
-    const coords = { lat: 52.678606, lng: 14.847574 };
-    const map = new google.maps.Map(mapEl, {
-      center: coords,
-      zoom: 14,
-      styles: [
-        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#e3f2fd' }] },
-        { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#f5f5f5' }] },
-      ],
-    });
-    new google.maps.Marker({ position: coords, map, title: 'HydroTech J&S' });
-
-    // Fix Google Maps a11y: patch generated area/iframe elements
-    const a11yObserver = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        for (const node of mutation.addedNodes) {
-          if (!(node instanceof HTMLElement)) continue;
-          if (node.tagName === 'AREA') {
-            if (!node.getAttribute('alt')) node.setAttribute('alt', 'Obszar mapy');
-            if (!node.getAttribute('aria-label')) node.setAttribute('aria-label', 'Obszar nawigacji mapy');
-          }
-          if (node.tagName === 'IFRAME') {
-            if (!node.getAttribute('title')) node.setAttribute('title', 'Mapa Google');
-          }
-          node.querySelectorAll('area:not([alt])').forEach(el => {
-            el.setAttribute('alt', 'Obszar mapy');
-            if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', 'Obszar nawigacji mapy');
-          });
-          node.querySelectorAll('iframe:not([title])').forEach(el => {
-            el.setAttribute('title', 'Mapa Google');
-          });
-        }
-      }
-    });
-    a11yObserver.observe(mapEl, { childList: true, subtree: true });
-  }
-
-  function setupMap() {
-    const mapEl = document.getElementById('map');
-    if (!mapEl || mapEl.dataset.mapInit) return;
-    mapEl.dataset.mapInit = 'true';
-
-    if ((window as any).google?.maps) {
-      initMapOnElement(mapEl);
-      return;
-    }
-
-    if (document.querySelector('script[src*="maps.googleapis"]')) {
-      // API script loading  wait for it
-      (window as any).initMap = () => initMapOnElement(mapEl);
-      return;
-    }
-
-    (window as any).initMap = () => initMapOnElement(mapEl);
-    const s = document.createElement('script');
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&callback=initMap';
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
-  }
-
-  document.addEventListener('astro:page-load', setupMap);
-</script>
