@@ -1,0 +1,196 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+
+// Map service keywords to matching blog post slugs
+const servicePostKeywords: Record<string, string[]> = {
+  'Hydraulika sanitarna': ['bojler', 'instalacji-wodnej', 'wymiana-instalacji'],
+  'Instalacje CO': ['ogrzewanie', 'grzejnik', 'kotłowni', 'kotlownia', 'kociol', 'piec', 'przygotowac-dom'],
+  'Uzdatnianie wody': ['uzdatniania', 'odzelaziacz', 'odżelaziacz'],
+  'Hydrofornie i pompy': ['hydroforni', 'hydrofornia', 'pompa', 'pompy'],
+  'Systemy nawadniania': ['nawadniania'],
+};
+
+function getRelatedPosts(serviceTitle: string) {
+  const keywords = servicePostKeywords[serviceTitle];
+  if (!keywords) return [];
+  return allPosts
+    .filter(p => {
+      const slug = p.id.replace('.md', '');
+      const title = p.data.title.toLowerCase();
+      return keywords.some(k => slug.includes(k) || title.includes(k));
+    })
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0, 3);
+}
+
+const services = [
+  {
+    icon: 'fas fa-faucet',
+    title: 'Hydraulika sanitarna',
+    desc: 'Kompleksowe usługi hydrauliczne dla domu i firmy.',
+    features: ['Montaż i wymiana baterii', 'Naprawa przecieków', 'Instalacje wodne i kanalizacyjne', 'Wymiana rur', 'Podłączanie urządzeń'],
+  },
+  {
+    icon: 'fas fa-fire',
+    title: 'Instalacje CO',
+    desc: 'Montaż i modernizacja systemów centralnego ogrzewania.',
+    features: ['Montaż grzejników', 'Instalacja kotłów gazowych', 'Kotły stałopalne i pelletowe', 'Ogrzewanie podłogowe', 'Pompy ciepła'],
+  },
+  {
+    icon: 'fas fa-exclamation-triangle',
+    title: 'Awarie 24/7',
+    desc: 'Całodobowe pogotowie hydrauliczne.',
+    features: ['Reakcja do 30 minut', 'Pęknięte rury', 'Zalania', 'Awarie kotłów', 'Pogotowie w weekendy'],
+    emergency: true,
+  },
+  {
+    icon: 'fas fa-tint',
+    title: 'Uzdatnianie wody',
+    desc: 'Filtry, odżelaziacze i zmiękczacze wody.',
+    features: ['Odżelaziacze', 'Zmiękczacze', 'Filtry mechaniczne', 'Lampy UV', 'Badanie jakości wody'],
+  },
+  {
+    icon: 'fas fa-water',
+    title: 'Hydrofornie i pompy',
+    desc: 'Montaż i serwis hydroforni oraz pomp głębinowych.',
+    features: ['Pompy głębinowe', 'Zestawy hydroforowe', 'Studnie głębinowe', 'Modernizacja instalacji', 'Serwis i naprawy'],
+  },
+  {
+    icon: 'fas fa-seedling',
+    title: 'Systemy nawadniania',
+    desc: 'Automatyczne nawadnianie ogrodów i terenów zielonych.',
+    features: ['Projektowanie systemów', 'Montaż zraszaczy', 'Systemy kropelkowe', 'Sterowniki automatyczne', 'Serwis sezonowy'],
+  },
+];
+---
+
+<Layout
+  title="Usługi hydrauliczne | HydroTech J&S - Witnica"
+  description="Pełna oferta usług hydraulicznych: hydraulika sanitarna, instalacje CO, awarie 24/7, uzdatnianie wody, hydrofornie."
+>
+  <!-- Hero with background image -->
+  <section class="relative text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <Image src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80" alt="Usługi hydrauliczne Witnica - instalacje CO, hydraulika sanitarna, awarie 24/7" class="w-full h-full object-cover" width={1920} height={1080} loading="eager" />
+      <div class="absolute inset-0 bg-primary-900/75 backdrop-blur-[2px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center relative z-10">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">Nasze usługi</h1>
+      <p class="text-gray-300 text-lg max-w-2xl mx-auto">Oferujemy kompleksowe rozwiązania hydrauliczne dla domów i firm w Witnicy i okolicach</p>
+    </div>
+  </section>
+
+  <!-- Services grid -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[
+        { label: "Strona g\u0142\u00F3wna", href: "/" },
+        { label: "Us\u0142ugi" }
+      ]} />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((s, idx) => {
+          const related = s.emergency ? [] : getRelatedPosts(s.title);
+          return (
+            <div class={`bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition border ${s.emergency ? 'border-red-200 ring-1 ring-red-100' : 'border-primary-100'}`}>
+              <div class={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${s.emergency ? 'bg-red-100' : 'bg-primary-100'}`}>
+                <i class={`${s.icon} text-2xl ${s.emergency ? 'text-red-600' : 'text-primary-600'}`}></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">{s.title}</h3>
+              <p class="text-gray-600 text-sm mb-4">{s.desc}</p>
+              <ul class="space-y-2">
+                {s.features.map((f) => (
+                  <li class="flex items-center text-sm text-gray-700">
+                    <i class={`fas fa-check mr-2 text-xs ${s.emergency ? 'text-red-500' : 'text-primary-500'}`}></i>{f}
+                  </li>
+                ))}
+              </ul>
+
+              {related.length > 0 && (
+                <div class="mt-5 pt-4 border-t border-gray-100">
+                  <button
+                    type="button"
+                    data-toggle={`related-${idx}`}
+                    class="inline-flex items-center text-sm font-semibold text-primary-600 hover:text-primary-700 transition cursor-pointer group"
+                  >
+                    <i class="fas fa-images mr-2 text-xs"></i>
+                    Zobacz przykładowe realizacje
+                    <i class="fas fa-chevron-down ml-2 text-xs transition-transform duration-300 group-[.is-open]:rotate-180"></i>
+                  </button>
+
+                  <div id={`related-${idx}`} class="hidden mt-4 space-y-3">
+                    {related.map((post) => {
+                      const slug = post.id.replace('.md', '');
+                      const img = post.data.featured_image || post.data.gallery?.[0]?.image;
+                      return (
+                        <a href={`/posts/${slug}`} class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-primary-50 transition group/post">
+                          {img && (
+                            <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                              <img src={img} alt={post.data.title} width="64" height="64" class="w-full h-full object-cover" loading="lazy" />
+                            </div>
+                          )}
+                          <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold text-gray-800 group-hover/post:text-primary-600 transition truncate">{post.data.title}</p>
+                            <p class="text-xs text-gray-500 mt-0.5">{post.data.date.toLocaleDateString('pl-PL', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
+                          </div>
+                          <i class="fas fa-arrow-right text-xs text-gray-300 group-hover/post:text-primary-500 transition flex-shrink-0"></i>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {s.emergency && (
+                <div class="mt-5 pt-4 border-t border-red-100">
+                  <a href="tel:+48502313419" class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-700 transition">
+                    <i class="fas fa-phone mr-2"></i>Zadzwoń teraz!
+                  </a>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary-50 py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Potrzebujesz wyceny?</h2>
+      <p class="text-gray-600 mb-8">Darmowa wycena bez zobowiązań. Zadzwoń lub napisz!</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:+48502313419" class="px-6 py-3 bg-primary-600 text-white rounded-xl font-bold hover:bg-primary-700 transition shadow-md">
+          <i class="fas fa-phone mr-2"></i>502 313 419
+        </a>
+        <a href="/kontakt" class="px-6 py-3 bg-white text-primary-700 rounded-xl font-bold hover:bg-gray-50 transition shadow-md border border-primary-200">
+          <i class="fas fa-envelope mr-2"></i>Formularz kontaktowy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = (btn as HTMLElement).dataset.toggle;
+        if (!targetId) return;
+        const panel = document.getElementById(targetId);
+        if (!panel) return;
+        const isOpen = !panel.classList.contains('hidden');
+        if (isOpen) {
+          panel.classList.add('hidden');
+          btn.classList.remove('is-open');
+        } else {
+          panel.classList.remove('hidden');
+          btn.classList.add('is-open');
+        }
+      });
+    });
+  </script>
+</Layout>

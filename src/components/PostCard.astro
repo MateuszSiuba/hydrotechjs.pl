@@ -1,0 +1,130 @@
+﻿---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  slug: string;
+  category?: string;
+  featuredImage?: string;
+  tags?: string[];
+  gallery?: Array<{image: string; alt: string}>;
+}
+
+const { title, description, date, slug, category, featuredImage, tags, gallery } = Astro.props;
+
+const displayImage = featuredImage || gallery?.[0]?.image;
+
+const formattedDate = date.toLocaleDateString('pl-PL', {
+  year: 'numeric', month: 'short', day: 'numeric'
+});
+
+const categoryColors: Record<string, string> = {
+  realizacje: 'bg-green-100 text-green-700',
+  porady: 'bg-blue-100 text-blue-700',
+  pytania: 'bg-purple-100 text-purple-700',
+};
+
+const categoryIcons: Record<string, string> = {
+  realizacje: 'fa-hammer',
+  porady: 'fa-lightbulb',
+  pytania: 'fa-question-circle',
+};
+
+const placeholderIcons: Record<string, string> = {
+  realizacje: 'fa-wrench',
+  porady: 'fa-lightbulb',
+  pytania: 'fa-circle-question',
+};
+
+const placeholderBg: Record<string, string> = {
+  realizacje: 'from-primary-100 to-primary-200',
+  porady: 'from-amber-50 to-yellow-100',
+  pytania: 'from-purple-50 to-purple-100',
+};
+
+const placeholderColor: Record<string, string> = {
+  realizacje: 'text-primary-300',
+  porady: 'text-amber-300',
+  pytania: 'text-purple-300',
+};
+
+const postUrl = new URL(`/posts/${slug}`, Astro.site).toString();
+const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
+---
+
+<div class="relative bg-white rounded-2xl shadow-md overflow-hidden card-lift border border-gray-100/50 h-full flex flex-col group">
+  <!-- Image -->
+  <a href={`/posts/${slug}`} class={`relative block aspect-[16/10] overflow-hidden bg-gradient-to-br ${placeholderBg[category || ''] || 'from-primary-100 to-primary-200'}`} tabindex="-1">
+    {displayImage ? (
+      <Image src={displayImage} alt={title} width={640} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center">
+        <i class={`fas ${placeholderIcons[category || ''] || 'fa-wrench'} text-5xl ${placeholderColor[category || ''] || 'text-primary-300'}`}></i>
+      </div>
+    )}
+    {category && (
+      <span class={`absolute top-3 left-3 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm ${categoryColors[category] || 'bg-gray-100 text-gray-700'}`}>
+        <i class={`fas ${categoryIcons[category] || 'fa-tag'} mr-1`}></i>
+        {category.charAt(0).toUpperCase() + category.slice(1)}
+      </span>
+    )}
+  </a>
+  <!-- Content -->
+  <div class="p-6 flex-1 flex flex-col">
+    <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-primary-600 transition line-clamp-2 leading-snug">
+      <a href={`/posts/${slug}`} class="hover:text-primary-600">{title}</a>
+    </h3>
+    <p class="text-gray-500 text-sm mb-4 line-clamp-2 flex-1">{description}</p>
+    <div class="flex items-center justify-between text-xs text-gray-400 mt-auto pt-3 border-t border-gray-100">
+      <time datetime={date.toISOString()} class="flex items-center gap-1">
+        <i class="fas fa-calendar-alt text-primary-400"></i> {formattedDate}
+      </time>
+      <div class="flex items-center gap-3">
+        <!-- Share icons -->
+        <a
+          href={facebookShareUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#1877F2] text-gray-400 hover:text-white transition"
+          aria-label="Udostepnij na Facebook"
+        >
+          <i class="fab fa-facebook-f text-[11px]"></i>
+        </a>
+        <button
+          type="button"
+          data-copy-card-url={postUrl}
+          class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-primary-500 text-gray-400 hover:text-white transition cursor-pointer copy-card-link"
+          aria-label="Kopiuj link"
+        >
+          <i class="fas fa-link text-[11px]"></i>
+        </button>
+        <!-- Read link -->
+        <a href={`/posts/${slug}`} class="text-primary-600 font-medium group-hover:translate-x-1 transition-transform flex items-center gap-1">
+          Czytaj <i class="fas fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.copy-card-link') as HTMLElement | null;
+    if (!btn) return;
+    const url = btn.dataset.copyCardUrl;
+    if (!url) return;
+    navigator.clipboard.writeText(url).then(() => {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.className = 'fas fa-check text-[11px]';
+        btn.classList.add('!bg-green-500', '!text-white');
+        setTimeout(() => {
+          icon.className = 'fas fa-link text-[11px]';
+          btn.classList.remove('!bg-green-500', '!text-white');
+        }, 2000);
+      }
+    });
+  });
+</script>

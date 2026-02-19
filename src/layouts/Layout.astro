@@ -1,0 +1,367 @@
+﻿---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title,
+  description = 'Profesjonalny hydraulik Witnica i okolice. Awarie 24/7, instalacje CO, hydraulika sanitarna. Darmowa wycena!',
+  ogImage = '/images/og-image.jpg',
+  canonical,
+} = Astro.props;
+
+const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="HydroTech J&S" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#4a84d4" />
+  <meta name="format-detection" content="telephone=yes" />
+
+  <!-- Local SEO geo meta -->
+  <meta name="geo.region" content="PL-LB" />
+  <meta name="geo.placename" content="Witnica" />
+  <meta name="geo.position" content="52.678606;14.847574" />
+  <meta name="ICBM" content="52.678606, 14.847574" />
+
+  <!-- Language -->
+  <link rel="alternate" hreflang="pl" href={canonicalURL} />
+  <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:site_name" content="HydroTech J&S - Hydraulik Witnica" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="alternate" type="application/rss+xml" title="HydroTech J&S - Blog" href="/rss.xml" />
+
+  <!-- Preconnect to external resources -->
+  <link rel="preconnect" href="https://maps.googleapis.com" />
+  <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://maps.gstatic.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+  <link rel="stylesheet" href="/fonts/fontawesome.min.css" />
+
+  <!-- Schema.org LocalBusiness (enhanced) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Plumber",
+    "name": "HydroTech J&S",
+    "image": new URL('/images/og-image.jpg', Astro.site).toString(),
+    "description": "Profesjonalny hydraulik Witnica i okolice. Awarie 24/7, instalacje CO, hydraulika sanitarna, uzdatnianie wody.",
+    "url": Astro.site?.toString(),
+    "telephone": "+48502313419",
+    "email": "hydrotech.js@op.pl",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Mościczki 34C",
+      "addressLocality": "Witnica",
+      "addressRegion": "Lubuskie",
+      "postalCode": "66-460",
+      "addressCountry": "PL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 52.678606,
+      "longitude": 14.847574
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Witnica" },
+      { "@type": "City", "name": "Gorzów Wielkopolski" },
+      { "@type": "City", "name": "Kostrzyn nad Odrą" },
+      { "@type": "City", "name": "Dębno" },
+      { "@type": "City", "name": "Dąbroszyn" },
+      { "@type": "City", "name": "Słubice" },
+      { "@type": "City", "name": "Sulęcin" },
+      { "@type": "City", "name": "Lubiszyn" },
+      { "@type": "City", "name": "Rzepin" },
+      { "@type": "City", "name": "Ośno Lubuskie" },
+      { "@type": "City", "name": "Bogdaniec" },
+      { "@type": "City", "name": "Deszczno" },
+      { "@type": "AdministrativeArea", "name": "Lubuskie" }
+    ],
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "15:00" }
+    ],
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "4", "bestRating": "5", "worstRating": "1" },
+    "sameAs": [
+      "https://www.facebook.com/p/HydroTech-JS-61573979556456/",
+      "https://maps.app.goo.gl/wwdWoJdQHAHkjxen9"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Usługi hydrauliczne",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hydraulika sanitarna" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalacje centralnego ogrzewania" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pogotowie hydrauliczne 24/7" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Uzdatnianie wody" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hydrofornie i pompy" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Systemy nawadniania" } }
+      ]
+    }
+  })} />
+
+  <!-- Website schema for sitelinks search box -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": Astro.site?.toString(),
+    "name": "HydroTech J&S",
+    "description": "Profesjonalne usługi hydrauliczne w Witnicy i okolicach",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": new URL('/blog', Astro.site).toString()
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
+
+  <ClientRouter fallback="swap" />
+  <slot name="head" />
+</head>
+<body class="min-h-screen flex flex-col bg-white text-gray-800 antialiased">
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" class="hidden fixed bottom-0 inset-x-0 z-50 p-4 bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-2xl">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4">
+      <p class="text-sm text-gray-600 flex-1">
+        <span class="text-lg mr-1">&#x1F36A;</span> Używamy plików cookies do poprawnego działania strony i analizy ruchu. <a href="/polityka-prywatnosci" class="underline hover:text-gray-900 transition font-medium">Dowiedz się więcej</a>.
+      </p>
+      <div class="flex gap-2">
+        <button id="cookie-accept" class="px-5 py-2.5 bg-primary-600 text-white rounded-xl text-sm font-medium hover:bg-primary-700 transition cursor-pointer shadow-md">Akceptuję</button>
+        <button id="cookie-reject" class="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-xl text-sm font-medium hover:bg-gray-200 transition cursor-pointer">Odrzuć</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating phone button -->
+  <a href="tel:+48502313419"
+     id="floating-phone"
+     class="fixed bottom-6 left-4 z-40 w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full shadow-lg hover:shadow-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 flex items-center justify-center group"
+     aria-label="Zadzwoń: +48 502 313 419"
+  >
+    <i class="fas fa-phone text-lg group-hover:scale-110 transition-transform"></i>
+    <span class="absolute left-full ml-3 bg-gray-900 text-white text-sm px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+      +48 502 313 419
+    </span>
+  </a>
+
+  <!-- Scroll to top -->
+  <button id="scroll-top" class="hidden fixed bottom-20 right-4 z-40 w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-primary-600 hover:to-primary-700 transition cursor-pointer" aria-label="Przejdź na górę">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-primary-100/50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="flex items-center gap-2 text-2xl font-bold text-primary-700 hover:text-primary-800 transition" aria-label="HydroTech J&S - Strona główna">
+          <i class="fas fa-faucet-drip text-primary-500"></i>
+          Hydro<span class="text-primary-500">Tech J&S</span>
+        </a>
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 hover:text-primary-600 cursor-pointer" aria-label="Menu nawigacyjne">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-1" aria-label="Nawigacja główna">
+          <a href="/" class="px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition font-medium">
+            <i class="fas fa-home mr-1"></i> Strona główna
+          </a>
+          <a href="/uslugi" class="px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition font-medium">
+            <i class="fas fa-tools mr-1"></i> Usługi
+          </a>
+          <a href="/blog" class="px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition font-medium">
+            <i class="fas fa-newspaper mr-1"></i> Blog
+          </a>
+          <a href="/kontakt" class="px-4 py-2 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition font-medium">
+            <i class="fas fa-phone mr-1"></i> Kontakt
+          </a>
+        </nav>
+      </div>
+      <!-- Mobile nav -->
+      <nav id="mobile-menu" class="hidden md:hidden pb-4" aria-label="Nawigacja mobilna">
+        <div class="flex flex-col gap-1">
+          <a href="/" class="px-4 py-3 text-gray-700 hover:bg-primary-50 rounded-lg transition">
+            <i class="fas fa-home mr-2"></i> Strona główna
+          </a>
+          <a href="/uslugi" class="px-4 py-3 text-gray-700 hover:bg-primary-50 rounded-lg transition">
+            <i class="fas fa-tools mr-2"></i> Usługi
+          </a>
+          <a href="/blog" class="px-4 py-3 text-gray-700 hover:bg-primary-50 rounded-lg transition">
+            <i class="fas fa-newspaper mr-2"></i> Blog
+          </a>
+          <a href="/kontakt" class="px-4 py-3 text-gray-700 hover:bg-primary-50 rounded-lg transition">
+            <i class="fas fa-phone mr-2"></i> Kontakt
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1" transition:animate="fade">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white" transition:persist>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Company -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-faucet-drip text-primary-400 text-xl"></i>
+            <h4 class="text-xl font-bold text-white">HydroTech J&S</h4>
+          </div>
+          <p class="text-primary-300 text-sm mb-3">Profesjonalne usługi hydrauliczne</p>
+          <p class="text-primary-400 text-sm">Mościczki 34C, 66-460 Witnica</p>
+          <p class="text-primary-400 text-sm">NIP: 599-253-80-52</p>
+        </div>
+        <!-- Navigation -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-primary-300">Nawigacja</h4>
+          <ul class="space-y-2.5">
+            <li><a href="/" class="text-primary-400 hover:text-white transition text-sm flex items-center gap-2"><i class="fas fa-home text-xs"></i> Strona główna</a></li>
+            <li><a href="/uslugi" class="text-primary-400 hover:text-white transition text-sm flex items-center gap-2"><i class="fas fa-tools text-xs"></i> Usługi</a></li>
+            <li><a href="/blog" class="text-primary-400 hover:text-white transition text-sm flex items-center gap-2"><i class="fas fa-newspaper text-xs"></i> Blog</a></li>
+            <li><a href="/kontakt" class="text-primary-400 hover:text-white transition text-sm flex items-center gap-2"><i class="fas fa-phone text-xs"></i> Kontakt</a></li>
+            <li><a href="/polityka-prywatnosci" class="text-primary-400 hover:text-white transition text-sm flex items-center gap-2"><i class="fas fa-shield-alt text-xs"></i> Polityka prywatności</a></li>
+          </ul>
+        </div>
+        <!-- Social + Contact -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4 text-primary-300">Social Media</h4>
+          <div class="flex gap-3 mb-5">
+            <a href="https://www.facebook.com/p/HydroTech-JS-61573979556456/" target="_blank" rel="noopener noreferrer"
+               class="w-10 h-10 bg-primary-800/50 hover:bg-primary-700 rounded-xl flex items-center justify-center transition" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer"
+               class="w-10 h-10 bg-primary-800/50 hover:bg-primary-700 rounded-xl flex items-center justify-center transition" aria-label="Google Maps">
+              <i class="fab fa-google"></i>
+            </a>
+          </div>
+          <div class="space-y-2 text-sm text-primary-400">
+            <p><i class="fas fa-phone mr-2 text-primary-500"></i><a href="tel:+48502313419" class="hover:text-white transition">+48 502 313 419</a></p>
+            <p><i class="fas fa-envelope mr-2 text-primary-500"></i><a href="mailto:hydrotech.js@op.pl" class="hover:text-white transition">hydrotech.js@op.pl</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-primary-800/50 py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-primary-500">
+        <p>&copy; 2026 HydroTech J&S. Wszystkie prawa zastrzeżone.</p>
+        <a href="/polityka-prywatnosci" class="hover:text-white transition">Polityka prywatności</a>
+        <span class="hidden sm:inline text-primary-700">|</span>
+        <p>Wykonanie strony: <a href="https://github.com/MateuszSiuba" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Mateusz Siuba</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Client-side scripts -->
+  <script>
+    // Mobile menu toggle - re-bind on each page load for View Transitions
+    document.addEventListener('astro:page-load', () => {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+      });
+
+      // Close mobile menu on navigation
+      mobileMenu?.classList.add('hidden');
+    });
+
+    // Scroll to top (runs once, survives transitions)
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollBtn?.classList.remove('hidden');
+      } else {
+        scrollBtn?.classList.add('hidden');
+      }
+    });
+    scrollBtn?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Cookie banner
+    function loadAnalytics() {
+      if ((window as any).gtagLoaded) return;
+      (window as any).gtagLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-B3JM0G3ZD6';
+      document.head.appendChild(s);
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      function gtag(...args: any[]) { (window as any).dataLayer.push(arguments); }
+      (window as any).gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-B3JM0G3ZD6');
+    }
+
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieAcceptBtn = document.getElementById('cookie-accept');
+    const cookieRejectBtn = document.getElementById('cookie-reject');
+
+    if (!localStorage.getItem('cookieAccepted')) {
+      setTimeout(() => cookieBanner?.classList.remove('hidden'), 2000);
+    } else if (localStorage.getItem('cookieAccepted') === 'true') {
+      loadAnalytics();
+    }
+
+    cookieAcceptBtn?.addEventListener('click', () => {
+      localStorage.setItem('cookieAccepted', 'true');
+      cookieBanner?.classList.add('hidden');
+      loadAnalytics();
+    });
+    cookieRejectBtn?.addEventListener('click', () => {
+      localStorage.setItem('cookieAccepted', 'false');
+      cookieBanner?.classList.add('hidden');
+    });
+
+    // Track page views on SPA navigation
+    document.addEventListener('astro:page-load', () => {
+      if ((window as any).gtag) {
+        (window as any).gtag('event', 'page_view', {
+          page_path: window.location.pathname,
+        });
+      }
+    });
+  </script>
+</body>
+</html>

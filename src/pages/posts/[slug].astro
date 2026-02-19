@@ -1,0 +1,523 @@
+﻿---
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => {
+    const slug = post.id.replace(/\.md$/, '');
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const slug = post.id.replace(/\.md$/, '');
+const canonicalURL = new URL(`/posts/${slug}`, Astro.site).toString();
+
+// Related posts: same category first, then recent, max 3
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const currentSlug = slug;
+const currentCategory = post.data.category;
+const currentTags = post.data.tags || [];
+
+const otherPosts = allPosts.filter(p => p.id.replace(/\.md$/, '') !== currentSlug);
+
+// Score posts by relevance
+const scoredPosts = otherPosts.map(p => {
+  let score = 0;
+  if (p.data.category === currentCategory) score += 10;
+  const pTags = p.data.tags || [];
+  const sharedTags = pTags.filter(t => currentTags.includes(t));
+  score += sharedTags.length * 3;
+  // Recency bonus (newer = higher)
+  score += (p.data.date.getTime() / (1000 * 60 * 60 * 24 * 365));
+  return { post: p, score };
+});
+
+const relatedPosts = scoredPosts
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 3)
+  .map(s => s.post);
+
+const formattedDate = post.data.date.toLocaleDateString('pl-PL', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+
+const categoryLabels: Record<string, string> = {
+  realizacje: 'Realizacja',
+  porady: 'Porada',
+  pytania: 'Pytanie',
+};
+
+// Article schema
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "description": post.data.seo_description || post.data.description,
+  "image": post.data.featured_image || (post.data.gallery?.[0]?.image ? new URL(post.data.gallery[0].image, Astro.site).toString() : undefined),
+  "datePublished": post.data.date.toISOString(),
+  "dateModified": (post.data.lastmod || post.data.date).toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": post.data.author || "HydroTech J&S",
+    "url": Astro.site?.toString()
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HydroTech J&S",
+    "url": Astro.site?.toString()
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL
+  },
+  "keywords": post.data.tags?.join(', ')
+};
+
+// FAQ schema for "pytania" category
+const isFAQ = post.data.category === 'pytania';
+const faqSchema = isFAQ ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": post.data.title,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": post.data.description
+      }
+    }
+  ]
+} : null;
+---
+
+<Layout
+  title={`${post.data.title} | HydroTech J&S`}
+  description={post.data.seo_description || post.data.description}
+  ogImage={post.data.featured_image || post.data.gallery?.[0]?.image}
+  canonical={canonicalURL}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    {faqSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    )}
+  </Fragment>
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <Breadcrumbs items={[
+        { label: "Strona główna", href: "/" },
+        { label: "Blog", href: "/blog" },
+        { label: post.data.title }
+      ]} />
+
+    <!-- Header -->
+    <header class="mb-10">
+      {post.data.category && (
+        <span class={`inline-block text-xs font-semibold px-3 py-1.5 rounded-full mb-4 ${
+          post.data.category === 'realizacje' ? 'bg-green-100 text-green-700' :
+          post.data.category === 'porady' ? 'bg-blue-100 text-blue-700' :
+          'bg-purple-100 text-purple-700'
+        }`}>
+          <i class={`fas ${
+            post.data.category === 'realizacje' ? 'fa-hammer' :
+            post.data.category === 'porady' ? 'fa-lightbulb' :
+            'fa-question-circle'
+          } mr-1`}></i>
+          {categoryLabels[post.data.category] || post.data.category}
+        </span>
+      )}
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-5 leading-tight">
+        {post.data.title}
+      </h1>
+      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+        <time datetime={post.data.date.toISOString()} class="flex items-center gap-1.5">
+          <i class="fas fa-calendar-alt text-primary-400"></i> {formattedDate}
+        </time>
+        {post.data.author && (
+          <span class="flex items-center gap-1.5">
+            <i class="fas fa-user text-primary-400"></i> {post.data.author}
+          </span>
+        )}
+      </div>
+    </header>
+
+    <!-- Featured image -->
+    {post.data.featured_image && (
+      <div class="rounded-2xl overflow-hidden mb-10 shadow-lg">
+        <Image src={post.data.featured_image} alt={post.data.title} width={1200} height={675} class="w-full h-auto" loading="eager" decoding="async" />
+      </div>
+    )}
+
+    <!-- Features / Scope -->
+    {post.data.features && post.data.features.length > 0 && (
+      <div class="bg-gradient-to-br from-primary-50 to-blue-50 border border-primary-100 rounded-2xl p-8 mb-10">
+        <h3 class="font-bold text-gray-800 mb-4 text-lg">
+          <i class="fas fa-list-check mr-2 text-primary-600"></i>Zakres prac
+        </h3>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {post.data.features.map((f) => (
+            <li class="flex items-center text-sm text-gray-700">
+              <i class="fas fa-check-circle text-primary-500 mr-2.5"></i>{f}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Content -->
+    <div class="prose prose-lg prose-blue max-w-none
+                prose-headings:text-gray-800 prose-headings:font-bold prose-headings:mt-10 prose-headings:mb-4
+                prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-6
+                prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
+                prose-img:rounded-xl prose-img:shadow-md
+                prose-strong:text-gray-800
+                prose-ul:my-6 prose-li:mb-2
+                prose-hr:my-10"
+         id="post-content">
+      <Content />
+    </div>
+
+    <!-- Gallery -->
+    {post.data.gallery && post.data.gallery.length > 0 && (
+      <section class="mt-12">
+        <h3 class="text-xl font-bold text-gray-800 mb-5 water-pipe-line">
+          <i class="fas fa-images mr-2 text-primary-600"></i>Galeria zdjęć
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+          {(() => {
+            let imgIdx = 0;
+            return post.data.gallery.map((item, i) => {
+              const isVideo = /\.(mp4|mov|webm|ogg)$/i.test(item.image);
+              const currentImgIdx = imgIdx;
+              if (!isVideo) imgIdx++;
+              return isVideo ? (
+              <div class="rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition group">
+                <video
+                  src={item.image}
+                  controls
+                  preload="metadata"
+                  playsinline
+                  class="w-full h-48 object-cover"
+                  aria-label={item.alt}
+                >
+                  <track kind="captions" />
+                  Twoja przeglądarka nie obsługuje wideo.
+                </video>
+                <div class="bg-gray-50 px-3 py-2 text-xs text-gray-500 flex items-center gap-1.5">
+                  <i class="fas fa-video text-primary-500"></i>
+                  {item.alt}
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                data-lightbox={currentImgIdx}
+                class="block rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition group cursor-pointer"
+                aria-label={`Otwórz zdjęcie: ${item.alt}`}
+              >
+                <Image src={item.image} alt={item.alt} width={640} height={480} class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" />
+              </button>
+            );
+            });
+          })()}
+        </div>
+
+        <!-- Lightbox overlay -->
+        <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm items-center justify-center" role="dialog" aria-label="Galeria zdjęć">
+          <!-- Close -->
+          <button id="lb-close" type="button" class="absolute top-4 right-4 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-xl transition cursor-pointer" aria-label="Zamknij">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <!-- Counter -->
+          <div id="lb-counter" class="absolute top-4 left-4 z-10 text-white/70 text-sm font-medium bg-black/40 px-3 py-1.5 rounded-full"></div>
+
+          <!-- Prev -->
+          <button id="lb-prev" type="button" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-lg transition cursor-pointer" aria-label="Poprzednie zdjęcie">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <!-- Next -->
+          <button id="lb-next" type="button" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-lg transition cursor-pointer" aria-label="Następne zdjęcie">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <!-- Image container -->
+          <div class="flex items-center justify-center w-full h-full p-12 md:p-20">
+            <img id="lb-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300" />
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Tags -->
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-10 pt-8 border-t border-gray-100">
+        <i class="fas fa-tags text-gray-300 mt-1"></i>
+        {post.data.tags.map((tag) => (
+          <span class="text-xs px-3 py-1.5 bg-gray-50 text-gray-600 rounded-full border border-gray-200">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    <!-- Share buttons -->
+    <div class="flex items-center gap-3 mt-10 pt-8 border-t border-gray-100">
+      <span class="text-sm font-medium text-gray-500"><i class="fas fa-share-alt mr-1"></i>Udostępnij:</span>
+      <a
+        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalURL)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-[#1877F2] text-white text-sm font-medium rounded-lg hover:bg-[#166FE5] transition"
+        aria-label="Udostępnij na Facebook"
+      >
+        <i class="fab fa-facebook-f"></i> Facebook
+      </a>
+      <button
+        type="button"
+        id="copy-link-btn"
+        data-url={canonicalURL}
+        class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition cursor-pointer"
+        aria-label="Kopiuj link"
+      >
+        <i class="fas fa-link"></i> <span id="copy-link-text">Kopiuj link</span>
+      </button>
+    </div>
+
+    <!-- Related posts -->
+    {relatedPosts.length > 0 && (
+      <section class="mt-12 pt-8 border-t border-gray-100">
+        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <i class="fas fa-newspaper text-primary-500"></i> Podobne wpisy
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedPosts.map((rp) => (
+            <PostCard
+              title={rp.data.title}
+              description={rp.data.description}
+              date={rp.data.date}
+              slug={rp.id.replace(/\.md$/, '')}
+              category={rp.data.category}
+              featuredImage={rp.data.featured_image}
+              gallery={rp.data.gallery}
+              tags={rp.data.tags}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white rounded-2xl p-10 mt-12 text-center hero-blob">
+      <div class="relative z-10">
+        <h3 class="text-2xl font-bold mb-3">Potrzebujesz podobnej usługi?</h3>
+        <p class="text-primary-200 mb-6">Skontaktuj się z nami - darmowa wycena!</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="tel:+48502313419" class="px-8 py-3 bg-white text-primary-700 rounded-xl font-bold hover:bg-primary-50 transition shadow-lg">
+            <i class="fas fa-phone mr-2"></i>502 313 419
+          </a>
+          <a href="/kontakt" class="px-8 py-3 border-2 border-white text-white rounded-xl font-bold hover:bg-white/10 transition">
+            <i class="fas fa-envelope mr-2"></i>Formularz kontaktowy
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-8">
+      <a href="/blog" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition group">
+        <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>Wróć do bloga
+      </a>
+    </div>
+  </article>
+
+  <script>
+  document.addEventListener('astro:page-load', () => {
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img') as HTMLImageElement;
+    const lbCounter = document.getElementById('lb-counter');
+    const lbClose = document.getElementById('lb-close');
+    const lbPrev = document.getElementById('lb-prev');
+    const lbNext = document.getElementById('lb-next');
+
+    if (lightbox && lbImg) {
+      const thumbs = document.querySelectorAll<HTMLElement>('[data-lightbox]');
+      const images: { src: string; alt: string }[] = [];
+      let current = 0;
+
+      thumbs.forEach((btn) => {
+        const img = btn.querySelector('img');
+        if (img) {
+          images.push({ src: img.src, alt: img.alt });
+        }
+        btn.addEventListener('click', () => {
+          current = parseInt(btn.dataset.lightbox || '0', 10);
+          showImage();
+          lightbox.classList.remove('hidden');
+          lightbox.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function showImage() {
+        if (!images[current]) return;
+        lbImg.style.opacity = '0';
+        setTimeout(() => {
+          lbImg.src = images[current].src;
+          lbImg.alt = images[current].alt;
+          if (lbCounter) lbCounter.textContent = `${current + 1} / ${images.length}`;
+          lbImg.style.opacity = '1';
+        }, 150);
+      }
+
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      function prev() {
+        current = (current - 1 + images.length) % images.length;
+        showImage();
+      }
+
+      function next() {
+        current = (current + 1) % images.length;
+        showImage();
+      }
+
+      lbClose?.addEventListener('click', closeLightbox);
+      lbPrev?.addEventListener('click', prev);
+      lbNext?.addEventListener('click', next);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+    }
+  });
+  </script>
+
+  <script>
+  document.addEventListener('astro:page-load', () => {
+    const copyBtn = document.getElementById('copy-link-btn');
+    const copyText = document.getElementById('copy-link-text');
+    copyBtn?.addEventListener('click', async () => {
+      const url = (copyBtn as HTMLElement).dataset.url || window.location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        if (copyText) {
+          copyText.textContent = 'Skopiowano!';
+          copyBtn.classList.add('bg-green-100', 'text-green-700');
+          copyBtn.classList.remove('bg-gray-100', 'text-gray-700');
+          setTimeout(() => {
+            copyText.textContent = 'Kopiuj link';
+            copyBtn.classList.remove('bg-green-100', 'text-green-700');
+            copyBtn.classList.add('bg-gray-100', 'text-gray-700');
+          }, 2000);
+        }
+      } catch {
+        // Fallback for older browsers
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        if (copyText) copyText.textContent = 'Skopiowano!';
+      }
+    });
+  });
+  </script>
+
+  <script>
+  document.addEventListener('astro:page-load', () => {
+    // Transform "Przeczytaj też:" sections into styled cards with arrows
+    const postContent = document.getElementById('post-content');
+    if (postContent) {
+      postContent.querySelectorAll('strong').forEach(el => {
+        if (!el.textContent?.includes('Przeczytaj te')) return;
+        const parent = el.closest('p');
+        if (!parent) return;
+
+        // Create styled container
+        const container = document.createElement('div');
+        container.className = 'not-prose mt-10 bg-gradient-to-br from-primary-50 to-blue-50 border border-primary-100 rounded-2xl p-6';
+
+        // Heading
+        const heading = document.createElement('h4');
+        heading.className = 'font-bold text-gray-800 mb-4 text-base flex items-center gap-2';
+        heading.innerHTML = '<i class="fas fa-book-open text-primary-600"></i> Przeczytaj też';
+        container.appendChild(heading);
+
+        const linkContainer = document.createElement('div');
+        linkContainer.className = 'space-y-3';
+
+        // Check if next sibling is a <ul> (list format)
+        const nextEl = parent.nextElementSibling;
+        if (nextEl && nextEl.tagName === 'UL') {
+          nextEl.querySelectorAll('li').forEach(li => {
+            const a = li.querySelector('a');
+            if (!a) return;
+            const rawText = li.textContent || '';
+            const linkText = a.textContent || '';
+            const desc = rawText.replace(linkText, '').replace(/^[\s\u2014\u2013\-]+/, '').trim();
+
+            const linkEl = document.createElement('a');
+            linkEl.href = a.getAttribute('href') || '#';
+            linkEl.className = 'flex items-center gap-3 p-3 rounded-xl bg-white hover:bg-primary-50 border border-gray-100 hover:border-primary-200 transition group';
+            linkEl.innerHTML = '<i class="fas fa-arrow-right text-primary-500 group-hover:translate-x-1 transition-transform flex-shrink-0"></i>' +
+              '<div><span class="font-medium text-gray-800 group-hover:text-primary-600 transition">' + linkText + '</span>' +
+              (desc ? '<span class="block text-sm text-gray-500 mt-0.5">' + desc + '</span>' : '') + '</div>';
+            linkContainer.appendChild(linkEl);
+          });
+
+          // Remove <hr> before if exists
+          const prevEl = parent.previousElementSibling;
+          if (prevEl && prevEl.tagName === 'HR') prevEl.remove();
+          parent.replaceWith(container);
+          nextEl.remove();
+        } else {
+          // Inline format: **Przeczytaj też:** [link]()  desc
+          const a = parent.querySelector('a');
+          if (a) {
+            const rawText = parent.textContent || '';
+            const linkText = a.textContent || '';
+            const desc = rawText.replace('Przeczytaj też:', '').replace(linkText, '').replace(/^[\s\u2014\u2013\-]+/, '').trim();
+
+            const linkEl = document.createElement('a');
+            linkEl.href = a.getAttribute('href') || '#';
+            linkEl.className = 'flex items-center gap-3 p-3 rounded-xl bg-white hover:bg-primary-50 border border-gray-100 hover:border-primary-200 transition group';
+            linkEl.innerHTML = '<i class="fas fa-arrow-right text-primary-500 group-hover:translate-x-1 transition-transform flex-shrink-0"></i>' +
+              '<div><span class="font-medium text-gray-800 group-hover:text-primary-600 transition">' + linkText + '</span>' +
+              (desc ? '<span class="block text-sm text-gray-500 mt-0.5">' + desc + '</span>' : '') + '</div>';
+            linkContainer.appendChild(linkEl);
+
+            const prevEl = parent.previousElementSibling;
+            if (prevEl && prevEl.tagName === 'HR') prevEl.remove();
+            parent.replaceWith(container);
+          }
+        }
+
+        container.appendChild(linkContainer);
+      });
+    }
+  });
+  </script>
+</Layout>

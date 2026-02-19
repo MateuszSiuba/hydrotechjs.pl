@@ -1,0 +1,176 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const categories = ['wszystkie', 'realizacje', 'porady', 'pytania'];
+---
+
+<Layout
+  title="Blog hydrauliczny | Porady, realizacje i FAQ | HydroTech J&S Witnica"
+  description="Blog hydrauliczny: porady ekspertów, realizacje projektów, odpowiedzi na pytania. Ogrzewanie podłogowe, kotłownie, instalacje wodne. Witnica i okolice."
+>
+  <!-- Hero with background image -->
+  <section class="relative text-white overflow-hidden">
+    <div class="absolute inset-0">
+      <Image src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80" alt="Blog hydrauliczny - porady, realizacje i pytania o instalacje wodno-kanalizacyjne Witnica" class="w-full h-full object-cover" width={1920} height={1080} loading="eager" />
+      <div class="absolute inset-0 bg-primary-900/75 backdrop-blur-[2px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center relative z-10">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">Blog</h1>
+      <p class="text-gray-300 text-lg max-w-2xl mx-auto">Porady hydrauliczne, nasze realizacje i odpowiedzi na częste pytania</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-mesh-light bg-lines">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <Breadcrumbs items={[
+        { label: "Strona g\u0142\u00F3wna", href: "/" },
+        { label: "Blog" }
+      ]} />
+
+      <!-- Search bar -->
+      <div class="max-w-xl mx-auto mb-8">
+        <div class="relative">
+          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Szukaj, np. ogrzewanie podłogowe, bojler, kotłownia..."
+            class="w-full pl-11 pr-10 py-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition text-sm bg-white shadow-sm"
+          />
+          <button id="search-clear" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition cursor-pointer">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p id="search-count" class="text-xs text-gray-500 mt-2 text-center hidden"></p>
+      </div>
+
+      <!-- Category filters -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10" id="filters">
+        {categories.map((cat) => (
+          <button
+            data-category={cat}
+            class={`px-5 py-2.5 rounded-full text-sm font-medium transition cursor-pointer shadow-sm ${
+              cat === 'wszystkie'
+                ? 'bg-primary-600 text-white shadow-primary-200'
+                : 'bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-700 border border-gray-200'
+            }`}
+          >
+            {cat === 'wszystkie' ? 'Wszystkie' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      <!-- Posts grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
+        {sortedPosts.map((post) => (
+          <div
+            data-post-category={post.data.category || 'inne'}
+            data-post-search={`${post.data.title} ${post.data.description} ${(post.data.tags || []).join(' ')} ${post.data.category || ''}`}
+          >
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              slug={post.id.replace('.md', '')}
+              category={post.data.category}
+              featuredImage={post.data.featured_image}
+              gallery={post.data.gallery}
+              tags={post.data.tags}
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty state -->
+      <p id="no-results" class="text-center text-gray-500 py-12 hidden">
+        <i class="fas fa-search text-3xl text-gray-300 mb-3 block"></i>
+        Nie znaleziono wpisów pasujących do wyszukiwania.
+      </p>
+
+      {sortedPosts.length === 0 && (
+        <p class="text-center text-gray-500 py-12">Brak wpisów do wyświetlenia.</p>
+      )}
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const filters = document.getElementById('filters');
+      const grid = document.getElementById('posts-grid');
+      const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+      const searchClear = document.getElementById('search-clear');
+      const searchCount = document.getElementById('search-count');
+      const noResults = document.getElementById('no-results');
+
+      if (!grid) return;
+
+      let activeCategory = 'wszystkie';
+      let searchQuery = '';
+
+      function filterPosts() {
+        const posts = grid!.querySelectorAll('[data-post-category]');
+        let visibleCount = 0;
+
+        posts.forEach(el => {
+          const postEl = el as HTMLElement;
+          const postCat = postEl.dataset.postCategory || '';
+          const postSearch = (postEl.dataset.postSearch || '').toLowerCase();
+
+          const matchesCategory = activeCategory === 'wszystkie' || postCat === activeCategory;
+          const matchesSearch = !searchQuery || postSearch.includes(searchQuery);
+
+          if (matchesCategory && matchesSearch) {
+            postEl.style.display = '';
+            visibleCount++;
+          } else {
+            postEl.style.display = 'none';
+          }
+        });
+
+        if (noResults) noResults.classList.toggle('hidden', visibleCount > 0);
+
+        if (searchCount && searchQuery) {
+          searchCount.classList.remove('hidden');
+          searchCount.textContent = `Znaleziono ${visibleCount} ${visibleCount === 1 ? 'wpis' : visibleCount < 5 ? 'wpisy' : 'wpisów'}`;
+        } else if (searchCount) {
+          searchCount.classList.add('hidden');
+        }
+      }
+
+      filters?.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('button[data-category]') as HTMLButtonElement | null;
+        if (!btn) return;
+
+        activeCategory = btn.dataset.category || 'wszystkie';
+
+        filters.querySelectorAll('button').forEach(b => {
+          b.className = 'px-5 py-2.5 rounded-full text-sm font-medium transition cursor-pointer shadow-sm bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-700 border border-gray-200';
+        });
+        btn.className = 'px-5 py-2.5 rounded-full text-sm font-medium transition cursor-pointer shadow-sm bg-primary-600 text-white shadow-primary-200';
+
+        filterPosts();
+      });
+
+      searchInput?.addEventListener('input', () => {
+        searchQuery = searchInput.value.trim().toLowerCase();
+        if (searchClear) searchClear.classList.toggle('hidden', !searchQuery);
+        filterPosts();
+      });
+
+      searchClear?.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        searchClear?.classList.add('hidden');
+        filterPosts();
+      });
+    });
+  </script>
+</Layout>

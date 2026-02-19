@@ -1,0 +1,257 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const breadcrumbs = [
+  { label: 'Strona główna', href: '/' },
+  { label: 'Polityka prywatności' }
+];
+---
+
+<Layout
+  title="Polityka Prywatności | HydroTech J&S"
+  description="Polityka prywatności firmy HydroTech J&S. Dowiedz się, jak przetwarzamy Twoje dane osobowe, jakie pliki cookies stosujemy i jakie masz prawa."
+>
+  <section class="py-16 bg-gradient-to-b from-primary-50/30 to-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center flex-shrink-0"><i class="fas fa-shield-alt text-primary-500 text-xl"></i></div>
+        Polityka Prywatności
+      </h1>
+      <p class="text-gray-500 text-sm mb-10">Ostatnia aktualizacja: 11 lutego 2026 r.</p>
+
+      <div class="space-y-8">
+
+        <!-- 1. Administrator -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-user-shield text-primary-500 text-sm"></i></div>
+            1. Administrator danych osobowych
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            Administratorem Twoich danych osobowych jest <strong>HydroTech J&S</strong>,
+            z siedzibą pod adresem Mościczki 34C, 66-460 Witnica, NIP: 599-253-80-52.
+          </p>
+          <p class="text-gray-600 leading-relaxed mt-3">
+            Kontakt z administratorem: <a href="mailto:hydrotech.js@op.pl" class="text-primary-600 hover:text-primary-700 font-medium">hydrotech.js@op.pl</a>,
+            tel. <a href="tel:+48502313419" class="text-primary-600 hover:text-primary-700 font-medium">+48 502 313 419</a>.
+          </p>
+        </div>
+
+        <!-- 2. Jakie dane zbieramy -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-database text-primary-500 text-sm"></i></div>
+            2. Jakie dane zbieramy
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-3">W ramach działania strony możemy przetwarzać następujące dane:</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-primary-500 mt-1 flex-shrink-0"></i>
+              <span><strong>Formularz kontaktowy</strong>  imię i nazwisko, adres e-mail, numer telefonu, treść wiadomości</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-primary-500 mt-1 flex-shrink-0"></i>
+              <span><strong>Dane analityczne</strong>  anonimowe informacje o sposobie korzystania ze strony (Google Analytics)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-primary-500 mt-1 flex-shrink-0"></i>
+              <span><strong>Pliki cookies</strong>  niewielkie pliki tekstowe przechowywane na Twoim urządzeniu</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3. Cel przetwarzania -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-bullseye text-primary-500 text-sm"></i></div>
+            3. Cele przetwarzania danych
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-3">Twoje dane przetwarzamy w następujących celach:</p>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start gap-2">
+              <i class="fas fa-arrow-right text-primary-400 mt-1 flex-shrink-0"></i>
+              <span><strong>Odpowiedź na zapytanie</strong>  dane z formularza kontaktowego przetwarzamy wyłącznie w celu udzielenia odpowiedzi na Twoje zgłoszenie (art. 6 ust. 1 lit. f RODO)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-arrow-right text-primary-400 mt-1 flex-shrink-0"></i>
+              <span><strong>Analiza ruchu na stronie</strong>  korzystamy z Google Analytics w celu ulepszania naszej strony (art. 6 ust. 1 lit. a RODO  zgoda wyrażona przez baner cookies)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-arrow-right text-primary-400 mt-1 flex-shrink-0"></i>
+              <span><strong>Wyświetlanie mapy</strong>  Google Maps służy do prezentacji lokalizacji firmy (art. 6 ust. 1 lit. f RODO)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 4. Pliki cookies -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-cookie-bite text-primary-500 text-sm"></i></div>
+            4. Pliki cookies
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            Nasza strona wykorzystuje pliki cookies. Przy pierwszej wizycie wyświetlamy baner,
+            w którym możesz zaakceptować lub odrzucić cookies analityczne.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+              <thead>
+                <tr class="bg-primary-50">
+                  <th class="text-left p-3 font-semibold text-gray-700 border border-gray-200">Nazwa cookie</th>
+                  <th class="text-left p-3 font-semibold text-gray-700 border border-gray-200">Dostawca</th>
+                  <th class="text-left p-3 font-semibold text-gray-700 border border-gray-200">Cel</th>
+                  <th class="text-left p-3 font-semibold text-gray-700 border border-gray-200">Czas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-3 border border-gray-200 text-gray-600">cookies_accepted</td>
+                  <td class="p-3 border border-gray-200 text-gray-600">HydroTech J&S</td>
+                  <td class="p-3 border border-gray-200 text-gray-600">Zapamiętanie zgody na cookies</td>
+                  <td class="p-3 border border-gray-200 text-gray-600">365 dni</td>
+                </tr>
+                <tr class="bg-gray-50">
+                  <td class="p-3 border border-gray-200 text-gray-600">_ga, _ga_*</td>
+                  <td class="p-3 border border-gray-200 text-gray-600">Google Analytics</td>
+                  <td class="p-3 border border-gray-200 text-gray-600">Anonimowa analiza ruchu na stronie</td>
+                  <td class="p-3 border border-gray-200 text-gray-600">do 2 lat</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-gray-500 text-sm mt-4">
+            Możesz w każdej chwili zmienić ustawienia cookies w przeglądarce lub usunąć zapisane pliki cookies.
+          </p>
+        </div>
+
+        <!-- 5. Usługi zewnętrzne -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-cloud text-primary-500 text-sm"></i></div>
+            5. Usługi zewnętrzne
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-3">Na naszej stronie korzystamy z następujących usług zewnętrznych:</p>
+          <div class="space-y-4">
+            <div class="p-4 bg-gray-50 rounded-xl">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0"><i class="fab fa-google text-blue-500 text-sm"></i></div>
+                <h3 class="font-semibold text-gray-800">Google Analytics</h3>
+              </div>
+              <p class="text-sm text-gray-600 pl-11">Służy do anonimowej analizy ruchu na stronie. Dane są przesyłane na serwery Google. 
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">Polityka prywatności Google</a>.
+              </p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-xl">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0"><i class="fas fa-map-marked-alt text-green-500 text-sm"></i></div>
+                <h3 class="font-semibold text-gray-800">Google Maps</h3>
+              </div>
+              <p class="text-sm text-gray-600 pl-11">Wyświetla mapę z lokalizacją firmy. Przy ładowaniu mapy Twoja przeglądarka łączy się z serwerami Google.
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">Polityka prywatności Google</a>.
+              </p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-xl">
+              <div class="flex items-center gap-3 mb-2">
+                <div class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0"><i class="fas fa-paper-plane text-purple-500 text-sm"></i></div>
+                <h3 class="font-semibold text-gray-800">Formspree</h3>
+              </div>
+              <p class="text-sm text-gray-600 pl-11">Obsługuje formularz kontaktowy. Dane z formularza są przesyłane na serwery Formspree Inc.
+                  <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">Polityka prywatności Formspree</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Okres przechowywania -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-clock text-primary-500 text-sm"></i></div>
+            6. Okres przechowywania danych
+          </h2>
+          <ul class="space-y-2 text-gray-600">
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-primary-500 mt-1 flex-shrink-0"></i>
+              <span><strong>Dane z formularza kontaktowego</strong>  przechowujemy do momentu zakończenia korespondencji, maksymalnie 12 miesięcy</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-primary-500 mt-1 flex-shrink-0"></i>
+              <span><strong>Pliki cookies analityczne</strong>  zgodnie z ustawieniami Google Analytics (do 26 miesięcy)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fas fa-check text-primary-500 mt-1 flex-shrink-0"></i>
+              <span><strong>Cookie zgody</strong>  365 dni od wyrażenia zgody</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 7. Twoje prawa -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-gavel text-primary-500 text-sm"></i></div>
+            7. Twoje prawa
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-3">Zgodnie z RODO przysługują Ci następujące prawa:</p>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-2 p-3 bg-primary-50/50 rounded-xl text-sm text-gray-700">
+              <i class="fas fa-eye text-primary-500 flex-shrink-0"></i>
+              Prawo dostępu do danych
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-primary-50/50 rounded-xl text-sm text-gray-700">
+              <i class="fas fa-edit text-primary-500 flex-shrink-0"></i>
+              Prawo do sprostowania danych
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-primary-50/50 rounded-xl text-sm text-gray-700">
+              <i class="fas fa-trash-alt text-primary-500 flex-shrink-0"></i>
+              Prawo do usunięcia danych
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-primary-50/50 rounded-xl text-sm text-gray-700">
+              <i class="fas fa-ban text-primary-500 flex-shrink-0"></i>
+              Prawo do ograniczenia przetwarzania
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-primary-50/50 rounded-xl text-sm text-gray-700">
+              <i class="fas fa-exchange-alt text-primary-500 flex-shrink-0"></i>
+              Prawo do przenoszenia danych
+            </div>
+            <div class="flex items-center gap-2 p-3 bg-primary-50/50 rounded-xl text-sm text-gray-700">
+              <i class="fas fa-times-circle text-primary-500 flex-shrink-0"></i>
+              Prawo do cofnięcia zgody
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mt-4">
+            W celu realizacji swoich praw skontaktuj się z nami pod adresem
+            <a href="mailto:hydrotech.js@op.pl" class="text-primary-600 hover:underline font-medium">hydrotech.js@op.pl</a>.
+            Masz również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO).
+          </p>
+        </div>
+
+        <!-- 8. Bezpieczeństwo -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-lock text-primary-500 text-sm"></i></div>
+            8. Bezpieczeństwo danych
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            Strona korzysta z szyfrowanego połączenia SSL/TLS, co zapewnia bezpieczeństwo przesyłanych danych.
+            Stosujemy odpowiednie środki techniczne i organizacyjne w celu ochrony Twoich danych osobowych
+            przed nieuprawnionym dostępem, utratą lub zniszczeniem.
+          </p>
+        </div>
+
+        <!-- 9. Zmiany -->
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-8">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center flex-shrink-0"><i class="fas fa-sync-alt text-primary-500 text-sm"></i></div>
+            9. Zmiany w polityce prywatności
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            Zastrzegamy sobie prawo do wprowadzania zmian w niniejszej polityce prywatności.
+            O wszelkich istotnych zmianach poinformujemy poprzez aktualizację daty na tej stronie.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

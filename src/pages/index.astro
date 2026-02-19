@@ -1,0 +1,424 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import GoogleMap from '../components/GoogleMap.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => data.status === 'published');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const services = [
+  {
+    icon: 'fas fa-faucet',
+    title: 'Hydraulika',
+    desc: 'Kompleksowe usługi instalacyjne i naprawcze',
+    features: ['Instalacje wodne', 'Naprawy i konserwacje', 'Wymiana armatury'],
+  },
+  {
+    icon: 'fas fa-thermometer-half',
+    title: 'Ogrzewanie',
+    desc: 'Instalacja i modernizacja systemów CO',
+    features: ['Piece gazowe i olejowe', 'Kotły stałopalne', 'Ogrzewanie podłogowe'],
+  },
+  {
+    icon: 'fas fa-tools',
+    title: 'Awaria 24/7',
+    desc: 'Całodobowa pomoc w nagłych przypadkach',
+    features: ['Reakcja do 30 minut', '7 dni w tygodniu', 'Profesjonalny sprzęt'],
+    emergency: true,
+  },
+];
+
+const testimonials = [
+  { name: 'Ryszard', initial: 'R', text: 'Szybko, sprawnie i terminowo. Polecam.', date: '5 miesięcy temu' },
+  { name: 'Mati295', initial: 'M', text: 'Super wykonali robotę, polecam!', date: '6 miesięcy temu' },
+  { name: 'Dominik Stawicki', initial: 'D', text: 'Solidna firma. Można polecić każdemu.', date: '7 miesięcy temu' },
+  { name: 'Half -DeaD', initial: 'H', text: 'Świetna jakość usług!', date: '7 miesięcy temu' },
+];
+
+---
+
+<Layout title="HydroTech J&S - Hydraulik Witnica | Awarie 24h | Instalacje CO">
+
+  <!-- Hero with background image + dark overlay -->
+  <section class="relative text-white overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <Image src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80" alt="Hydraulik Witnica - profesjonalne usługi hydrauliczne HydroTech J&S" class="w-full h-full object-cover" width={1920} height={1080} loading="eager" />
+      <div class="absolute inset-0 bg-primary-900/75 backdrop-blur-[2px]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-lg">
+          Profesjonalne usługi hydrauliczne
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 mb-10">
+          24h/7 &ndash; Gwarancja jakości &ndash; Szybka interwencja
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/uslugi" class="px-8 py-4 bg-primary-500/90 text-white rounded-full font-bold hover:bg-primary-400 transition shadow-lg text-lg backdrop-blur-sm">
+            <i class="fas fa-tools mr-2"></i>Nasze Usługi
+          </a>
+          <a href="/kontakt" class="px-8 py-4 bg-transparent text-white rounded-full font-bold hover:bg-white/10 transition shadow-lg border-2 border-white/60 text-lg backdrop-blur-sm">
+            <i class="fas fa-phone mr-2"></i>Kontakt
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services with mesh background -->
+  <section class="py-20 md:py-24 bg-mesh-light bg-lines">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 water-pipe-line">Nasze usługi</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mt-6">Oferujemy kompleksowe rozwiązania dla Twojego domu lub firmy</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {services.map((s) => (
+          <div class="bg-white rounded-2xl p-8 shadow-md border border-primary-100/50 card-lift group">
+            <div class={`w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition ${s.emergency ? 'bg-gradient-to-br from-red-500 to-red-600 text-white shadow-red-200 shadow-lg' : 'bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-primary-200 shadow-lg'}`}>
+              <i class={`${s.icon} text-2xl`}></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">{s.title}</h3>
+            <p class="text-gray-500 text-sm mb-5">{s.desc}</p>
+            <ul class="space-y-2.5 mb-5">
+              {s.features.map((f) => (
+                <li class="flex items-center text-sm text-gray-700">
+                  <i class={`fas fa-check-circle mr-2 text-sm ${s.emergency ? 'text-red-500' : 'text-primary-500'}`}></i>{f}
+                </li>
+              ))}
+            </ul>
+            <a href={s.emergency ? 'tel:+48502313419' : '/uslugi'}
+               class={`inline-flex items-center text-sm font-semibold transition ${s.emergency ? 'text-red-600 hover:text-red-700' : 'text-primary-600 hover:text-primary-700'}`}>
+              {s.emergency ? 'Zadzwoń teraz!' : 'Dowiedz się więcej'}
+              <i class={`fas ${s.emergency ? 'fa-phone' : 'fa-arrow-right'} ml-2 text-xs`}></i>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us with gradient cards -->
+  <section class="py-20 md:py-24 bg-white bg-dots">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-14 text-center water-pipe-line">Dlaczego my?</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+        <div class="text-center p-8 rounded-2xl bg-gradient-to-b from-primary-50 to-white border border-primary-100 card-lift">
+          <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-primary-200">
+            <i class="fas fa-shield-alt text-xl"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-1">Gwarancja jakości</h3>
+          <p class="text-sm text-gray-500">Gwarancja na wszystkie prace</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-gradient-to-b from-primary-50 to-white border border-primary-100 card-lift">
+          <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-primary-200">
+            <i class="fas fa-piggy-bank text-xl"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-1">Konkurencyjne ceny</h3>
+          <p class="text-sm text-gray-500">Darmowa wycena bez zobowiązań</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-gradient-to-b from-primary-50 to-white border border-primary-100 card-lift">
+          <div class="w-14 h-14 mx-auto bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-primary-200">
+            <i class="fas fa-bolt text-xl"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 mb-1">Szybka reakcja</h3>
+          <p class="text-sm text-gray-500">Interwencja od 30 minut</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white border border-primary-400 card-lift shadow-lg shadow-primary-200">
+          <div class="w-14 h-14 mx-auto bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mb-4">
+            <i class="fas fa-star text-xl"></i>
+          </div>
+          <h3 class="font-bold mb-1">Ocena 5.0</h3>
+          <div class="text-yellow-300 mb-2 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <a href="https://maps.app.goo.gl/wwdWoJdQHAHkjxen9" target="_blank" rel="noopener noreferrer"
+             class="text-xs underline hover:text-white/80 transition">Zobacz opinie</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials with mesh background -->
+  <section class="py-20 md:py-24 bg-mesh-blue">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 water-pipe-line">Co mówią nasi klienci?</h2>
+        <p class="text-gray-600 mt-6">Sprawdź opinie zadowolonych klientów z Google</p>
+      </div>
+
+      <!-- Google Reviews header -->
+      <div class="flex items-center gap-3 bg-white rounded-2xl p-5 shadow-md border border-gray-100 mb-10 max-w-md mx-auto">
+        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-yellow-500 rounded-xl flex items-center justify-center">
+          <i class="fab fa-google text-xl text-white"></i>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800">HydroTech J&S</p>
+          <div class="flex items-center gap-1">
+            <span class="text-yellow-500">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="text-sm text-gray-500">5.0 na podstawie 4 opinii</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {testimonials.map((t) => (
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 card-lift">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                {t.initial}
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800 text-sm">{t.name}</h4>
+                <span class="text-yellow-500 text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              </div>
+            </div>
+            <p class="text-gray-600 text-sm italic mb-2">"{t.text}"</p>
+            <span class="text-xs text-gray-400">{t.date}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Posts -->
+  {latestPosts.length > 0 && (
+    <section class="py-20 md:py-24 bg-white bg-lines">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 water-pipe-line">Ostatnie realizacje i porady</h2>
+          <p class="text-gray-600 mt-6">Zobacz nasze najnowsze wpisy</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {latestPosts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              slug={post.id.replace('.md', '')}
+              category={post.data.category}
+              featuredImage={post.data.featured_image}
+              gallery={post.data.gallery}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+        <div class="text-center mt-12">
+          <a href="/blog" class="px-8 py-4 bg-primary-600 text-white rounded-xl font-semibold hover:bg-primary-700 transition shadow-md inline-flex items-center text-lg">
+            Zobacz wszystkie wpisy <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Contact + Map with mesh background -->
+  <section class="py-20 md:py-24 bg-mesh-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-14 text-center water-pipe-line">Kontakt</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
+        <!-- Info -->
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-lift">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-map-marker-alt text-lg"></i>
+            </div>
+            <div>
+              <strong class="text-gray-800">Adres</strong>
+              <p class="text-gray-500 text-sm">Mościczki 34C, 66-460 Witnica</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-lift">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-phone text-lg"></i>
+            </div>
+            <div>
+              <strong class="text-gray-800">Telefon</strong>
+              <p class="text-sm"><a href="tel:+48502313419" class="text-primary-600 hover:text-primary-700 font-medium">+48 502 313 419</a></p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-lift">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-envelope text-lg"></i>
+            </div>
+            <div>
+              <strong class="text-gray-800">Email</strong>
+              <p class="text-sm"><a href="mailto:hydrotech.js@op.pl" class="text-primary-600 hover:text-primary-700 font-medium">hydrotech.js@op.pl</a></p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-lift">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-clock text-lg"></i>
+            </div>
+            <div>
+              <strong class="text-gray-800">Godziny pracy</strong>
+              <p class="text-gray-500 text-sm">Pn-Pt: 8:00-18:00 | Sobota: 9:00-15:00</p>
+            </div>
+          </div>
+        </div>
+        <!-- Map -->
+        <GoogleMap />
+      </div>
+    </div>
+  </section>
+
+  <!-- Obsługiwane miasta / Service Area -->
+  <section class="py-20 md:py-24 bg-white bg-dots">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 water-pipe-line">Obs&#322;ugiwane miasta i okolice</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mt-6">Dzia&#322;amy na terenie Witnica i okolice &ndash; obs&#322;ugujemy ca&#322;y region w promieniu 50 km</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center mb-3 shadow-md">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Witnica</h3>
+          <p class="text-xs text-gray-400 mt-1">Siedziba firmy</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Gorz&#243;w Wlkp.</h3>
+          <p class="text-xs text-gray-400 mt-1">~30 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Kostrzyn nad Odr&#261;</h3>
+          <p class="text-xs text-gray-400 mt-1">~15 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">D&#281;bno</h3>
+          <p class="text-xs text-gray-400 mt-1">~30 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">D&#261;broszyn</h3>
+          <p class="text-xs text-gray-400 mt-1">~5 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">S&#322;ubice</h3>
+          <p class="text-xs text-gray-400 mt-1">~40 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Sul&#281;cin</h3>
+          <p class="text-xs text-gray-400 mt-1">~35 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Lubiszyn</h3>
+          <p class="text-xs text-gray-400 mt-1">~20 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Rzepin</h3>
+          <p class="text-xs text-gray-400 mt-1">~30 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">O&#347;no Lubuskie</h3>
+          <p class="text-xs text-gray-400 mt-1">~25 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Bogdaniec</h3>
+          <p class="text-xs text-gray-400 mt-1">~20 km</p>
+        </a>
+        <a href="/kontakt" class="group bg-gradient-to-b from-primary-50 to-white rounded-2xl p-5 border border-primary-100 text-center card-lift">
+          <div class="w-10 h-10 mx-auto bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-3">
+            <i class="fas fa-map-pin"></i>
+          </div>
+          <h3 class="font-bold text-gray-800 text-sm group-hover:text-primary-600 transition">Deszczno</h3>
+          <p class="text-xs text-gray-400 mt-1">~25 km</p>
+        </a>
+      </div>
+
+      <div class="bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl p-8 md:p-10 text-white text-center shadow-lg">
+        <i class="fas fa-truck text-3xl mb-4 opacity-80"></i>
+        <h3 class="text-xl md:text-2xl font-bold mb-3">Dojazd gratis!</h3>
+        <p class="text-primary-100 max-w-xl mx-auto mb-6">Obs&#322;ugujemy ca&#322;e wojew&#243;dztwo lubuskie. Dojazd do klienta jest wliczony w cen&#281; us&#322;ugi. Zadzwo&#324; i um&#243;w si&#281; na bezp&#322;atn&#261; wycen&#281;!</p>
+        <a href="tel:+48502313419" class="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-3.5 rounded-full font-bold hover:bg-primary-50 transition shadow-md text-lg">
+          <i class="fas fa-phone"></i> 502 313 419
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dodatkowe informacje Q&A -->
+  <section class="py-20 md:py-24 bg-white bg-dots">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-14 text-center water-pipe-line">Dodatkowe informacje</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+
+        <div class="bg-gradient-to-b from-primary-50 to-white rounded-2xl p-8 border border-primary-100 card-lift">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+              <i class="fas fa-clock text-lg"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800">Czas realizacji</h3>
+          </div>
+          <p class="text-gray-600 leading-relaxed">Standardowe us&#x142;ugi realizujemy w ci&#x105;gu 2-3 dni roboczych. W przypadku awarii - dojazd w ci&#x105;gu 2h! Wi&#x119;ksze projekty instalacyjne planujemy indywidualnie.</p>
+        </div>
+
+        <div class="bg-gradient-to-b from-primary-50 to-white rounded-2xl p-8 border border-primary-100 card-lift">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+              <i class="fas fa-wallet text-lg"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800">P&#x142;atno&#x15B;&#x107; i wycena</h3>
+          </div>
+          <p class="text-gray-600 leading-relaxed">Wycena jest zawsze darmowa i niezobowi&#x105;zuj&#x105;ca. Akceptujemy p&#x142;atno&#x15B;ci got&#xF3;wk&#x105;, przelewem oraz kart&#x105;. Faktury VAT dla firm. Mo&#x17C;liwo&#x15B;&#x107; p&#x142;atno&#x15B;ci po zako&#x144;czeniu prac.</p>
+        </div>
+
+        <div class="bg-gradient-to-b from-primary-50 to-white rounded-2xl p-8 border border-primary-100 card-lift">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+              <i class="fas fa-map-marked-alt text-lg"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800">Obszar dzia&#x142;ania</h3>
+          </div>
+          <p class="text-gray-600 leading-relaxed">Obs&#x142;ugujemy Witnic&#x119; oraz okolice w promieniu 50 km: Gorz&#xF3;w Wlkp., Kostrzyn nad Odr&#x105;, D&#x119;bno, D&#x105;broszyn, S&#x142;ubice, Sul&#x119;cin, Lubiszyn, Rzepin, O&#x15B;no Lubuskie, Bogdaniec, Deszczno i inne. Dojazd gratis!</p>
+        </div>
+
+        <div class="bg-gradient-to-b from-primary-50 to-white rounded-2xl p-8 border border-primary-100 card-lift">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+              <i class="fas fa-toolbox text-lg"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800">Materia&#x142;y i sprz&#x119;t</h3>
+          </div>
+          <p class="text-gray-600 leading-relaxed">Dysponujemy profesjonalnym sprz&#x119;tem i narz&#x119;dziami. Materia&#x142;y mo&#x17C;na zakupi&#x107; we w&#x142;asnym zakresie lub zaufa&#x107; nam - wsp&#xF3;&#x142;pracujemy z najlepszymi dostawcami, co pozwala uzyska&#x107; konkurencyjne ceny.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</Layout>
