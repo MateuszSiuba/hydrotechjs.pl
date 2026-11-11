@@ -8,14 +8,17 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'HydroTech J&S - Blog hydrauliczny',
-    description: 'Porady hydrauliczne, realizacje projektów i odpowiedzi na pytania. Ogrzewanie podłogowe, kotłownie, instalacje wodne. Witnica i okolice.',
+    description:
+      'Porady hydrauliczne, realizacje projektów i odpowiedzi na pytania. Ogrzewanie podłogowe, kotłownie, instalacje wodne. Witnica i okolice.',
     site: context.site!,
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.seo_description || post.data.description,
-      link: `/posts/${post.id.replace('.md', '')}/`,
-      categories: [post.data.category, ...(post.data.tags || [])],
+      link: `/posts/${post.id.replace('.md', '')}`,
+      categories: [post.data.category, ...(post.data.tags || [])].filter((value): value is string =>
+        Boolean(value),
+      ),
     })),
     customData: '<language>pl</language>',
   });

@@ -1,7 +1,14 @@
-﻿import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const posts = defineCollection({
-  type: 'content',
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/posts',
+    // Preserve historical URLs, including the existing Polish filename.
+    generateId: ({ entry }) => entry.replace(/\.md$/, ''),
+  }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -13,10 +20,17 @@ const posts = defineCollection({
     featured_image: z.string().optional(),
     author: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    gallery: z.array(z.object({
-      image: z.string(),
-      alt: z.string(),
-    })).optional(),
+    gallery: z.array(z.object({ image: z.string(), alt: z.string() })).optional(),
+    comparisons: z
+      .array(
+        z.object({
+          title: z.string(),
+          format: z.enum(['square', 'portrait']).default('square'),
+          before: z.object({ image: z.string(), alt: z.string() }),
+          after: z.object({ image: z.string(), alt: z.string() }),
+        }),
+      )
+      .optional(),
     features: z.array(z.string()).optional(),
   }),
 });

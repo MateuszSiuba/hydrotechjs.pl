@@ -3,9 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "24"
 
-[[redirects]]
-  from = "/*"
-  to = "/404"
-  status = 404
+# Explicit legacy redirects and the 404 fallback are generated in dist/_redirects.
+# Keep Pretty URLs enabled in Netlify to serve extensionless file routes.

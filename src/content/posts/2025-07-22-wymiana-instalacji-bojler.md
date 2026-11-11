@@ -1,12 +1,22 @@
 ﻿---
 title: "Wymiana instalacji wodnej przy bojlerze"
 date: 2025-07-22T10:00:00.000Z
-lastmod: 2026-02-11T10:00:00.000Z
+lastmod: 2026-11-11
 category: realizacje
 status: published
 description: "Kompleksowa wymiana przestarzałej instalacji wodnej przy bojlerze. Stare, skorodowane rury zostały zastąpione nowoczesnymi rurami z tworzywa sztucznego."
 seo_description: "Kompleksowa wymiana instalacji przy bojlerze — od usunięcia starych rur po testy szczelności. Zobacz efekty modernizacji krok po kroku."
 author: "HydroTech J&S"
+featured_image: /attachments/bojlerpo1.JPEG
+comparisons:
+  - title: "Wymiana instalacji przy bojlerze"
+    format: portrait
+    before:
+      image: /attachments/bojlerprzed1.JPEG
+      alt: "Rury, filtr i połączenia przed wymianą"
+    after:
+      image: /attachments/bojlerpo1.JPEG
+      alt: "Instalacja przy bojlerze po wymianie rur i armatury"
 tags:
   - "realizacje"
   - "bojler"

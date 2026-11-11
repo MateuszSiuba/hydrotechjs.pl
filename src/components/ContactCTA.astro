@@ -1,0 +1,25 @@
+---
+import { company } from '../data/company';
+---
+
+<section class="contact-cta">
+  <div class="site-container cta-inner">
+    <div>
+      <p class="eyebrow light">Porozmawiajmy o Twojej instalacji</p>
+      <h2>
+        Dobry początek?
+        <br />
+        Jeden telefon.
+      </h2>
+      <p>Opowiedz, czego potrzebujesz. Ustalimy zakres prac i kolejny krok.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="button button-accent" href={company.phoneHref}>
+        <i class="fas fa-phone" aria-hidden="true"></i> {company.phone}
+      </a>
+      <a class="text-link light" href="/kontakt#formularz">
+        Wolisz napisać? Wyślij wiadomość <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+import sharp from 'sharp';
+import { join } from 'node:path';
+interface Props {
+  base: string;
+  alt: string;
+  class?: string;
+  eager?: boolean;
+  sizes?: string;
+}
+const {
+  base,
+  alt,
+  class: className,
+  eager = false,
+  sizes = '(max-width: 767px) 100vw, 50vw',
+} = Astro.props;
+const encodedBase = encodeURI(base);
+const variants = await Promise.all(
+  [480, 768, 1200].map(async (size) => {
+    const metadata = await sharp(join(process.cwd(), 'public', `${base}-${size}.webp`)).metadata();
+    return { size, width: metadata.width!, height: metadata.height! };
+  }),
+);
+const largest = variants[2];
+const uniqueVariants = variants.filter(
+  (variant, index) => variants.findIndex((item) => item.width === variant.width) === index,
+);
+const srcset = (extension: string) =>
+  uniqueVariants
+    .map((variant) => `${encodedBase}-${variant.size}.${extension} ${variant.width}w`)
+    .join(', ');
+---
+
+<picture>
+  <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
+  <img
+    src={`${encodedBase}-1200.webp`}
+    srcset={srcset('webp')}
+    sizes={sizes}
+    alt={alt}
+    width={largest.width}
+    height={largest.height}
+    class={className}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+  />
+</picture>

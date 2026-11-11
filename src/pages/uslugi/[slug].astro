@@ -1,0 +1,120 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProjectImage from '../../components/ProjectImage.astro';
+import PostCard from '../../components/PostCard.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import { services } from '../../data/services';
+import { company } from '../../data/company';
+import { getCollection } from 'astro:content';
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props;
+const posts = await getCollection('posts', ({ data }) => data.status === 'published');
+const related = posts
+  .filter((post) =>
+    service.keywords.some((keyword) =>
+      `${post.id} ${post.data.title}`.toLowerCase().includes(keyword),
+    ),
+  )
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.description,
+  url: new URL(`/uslugi/${service.slug}`, Astro.site).toString(),
+  provider: { '@id': new URL('/#firma', Astro.site).toString() },
+  areaServed: { '@type': 'City', name: 'Witnica' },
+};
+---
+
+<Layout
+  title={`${service.title} — Witnica i okolice | HydroTech J&S`}
+  description={`${service.description} HydroTech J&S, Witnica i okolice. Zadzwoń: 502 313 419.`}
+  ogImage={`${service.image}-1200.webp`}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <section class="page-hero">
+    <div class="site-container">
+      <Breadcrumbs
+        items={[
+          { label: 'Strona główna', href: '/' },
+          { label: 'Usługi', href: '/uslugi' },
+          { label: service.short },
+        ]}
+      />
+      <p class="eyebrow">HydroTech J&S · Witnica i okolice</p>
+      <h1>{service.title}</h1>
+      <p class="lead">{service.description}</p>
+      <div class="hero-actions">
+        <a class="button button-dark" href={company.phoneHref}>
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          {company.phone}
+        </a>
+        <a class="text-link" href="/kontakt#formularz">
+          Zapytaj o wycenę <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section-space">
+    <div class="site-container service-detail">
+      <div class="detail-copy">
+        <p class="eyebrow">Zakres usługi</p>
+        <h2>W czym możemy pomóc?</h2>
+        <p>{service.intro}</p>
+        <ul class="scope-list">
+          {service.features.map((feature) => (
+            <li>
+              <i class="fas fa-check" aria-hidden="true"></i>
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <h2>{service.detailTitle}</h2>
+        <p>{service.detail}</p>
+        <a class="text-link" href="/uslugi">
+          Wszystkie usługi <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div>
+        <div class="detail-image">
+          <ProjectImage base={service.image} alt={service.imageAlt} eager />
+        </div>
+        <aside class="detail-aside">
+          <h2>Co przygotować do rozmowy?</h2>
+          <p>{service.preparation}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+  {related.length > 0 && (
+    <section class="section-space area-section">
+      <div class="site-container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Z naszej praktyki</p>
+            <h2>Realizacje i przydatne porady.</h2>
+          </div>
+        </div>
+        <div class="post-grid">
+          {related.map((post) => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              slug={post.id.replace(/\.md$/, '')}
+              category={post.data.category}
+              featuredImage={post.data.featured_image}
+              gallery={post.data.gallery}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  <ContactCTA />
+</Layout>

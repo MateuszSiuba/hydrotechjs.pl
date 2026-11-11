@@ -7,13 +7,10 @@ export default defineConfig({
   site: 'https://hydrotechjs.pl',
   output: 'static',
   build: {
-    format: 'file'
-  },
-  image: {
-    domains: ['images.unsplash.com'],
+    format: 'file',
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !/\/404(?:\.html)?\/?$/.test(page) })],
 });

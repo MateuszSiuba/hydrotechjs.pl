@@ -1,0 +1,60 @@
+---
+import ProjectImage from './ProjectImage.astro';
+import { imageBase } from '../data/media';
+
+interface Props {
+  title: string;
+  before: { image: string; alt: string };
+  after: { image: string; alt: string };
+  format?: 'square' | 'portrait';
+  gallery?: boolean;
+}
+const { title, before, after, format = 'square', gallery = false } = Astro.props;
+const photos = [
+  { label: 'Przed', ...before },
+  { label: 'Po', ...after },
+];
+---
+
+<div class:list={['comparison-grid', `comparison-${format}`]} role="group" aria-label={title}>
+  {photos.map((photo) => {
+    const base = imageBase(photo.image);
+    return (
+      <figure class="comparison-item">
+        <figcaption class="comparison-caption">
+          <span
+            class:list={['comparison-label', { 'comparison-label-after': photo.label === 'Po' }]}
+          >
+            {photo.label}
+          </span>
+          <span>{photo.alt}</span>
+        </figcaption>
+        <a
+          class="comparison-photo"
+          href={photo.image}
+          data-gallery-image={gallery || undefined}
+          target={gallery ? undefined : '_blank'}
+          rel={gallery ? undefined : 'noopener noreferrer'}
+          aria-label={`Powiększ zdjęcie — ${photo.label.toLowerCase()}: ${photo.alt}${gallery ? '' : ' (nowa karta)'}`}
+        >
+          {base ? (
+            <ProjectImage
+              base={base}
+              alt={photo.alt}
+              sizes="(max-width: 600px) 100vw, (max-width: 940px) 50vw, 600px"
+            />
+          ) : (
+            <img
+              src={photo.image}
+              alt={photo.alt}
+              width="768"
+              height="768"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </a>
+      </figure>
+    );
+  })}
+</div>
